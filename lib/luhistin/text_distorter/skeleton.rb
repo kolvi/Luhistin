@@ -17,7 +17,7 @@ module Luhistin
 		txt
 	  end
 
-	  def modify_words(text, curve)
+	  def modify_some_words(text, curve)
 	  	traverse_each_word(text, curve) do |word, final_bias|
 	  	  if (Random.rand < final_bias)
 	  	  	yield(word)

@@ -3,10 +3,8 @@ module Luhistin
     class ChopWords < Skeleton
 
       def distort(text, curve)
-      	traverse_each_word(text, curve) do |word, relative_pos|
-		   offset = adjusted_offset(relative_pos, curve)
-
- 	       (Random.rand < offset) ? word.insert_random_space : word
+      	modify_some_words(text, curve) do |word|
+      	  word.insert_random_space
       	end
       end
 
