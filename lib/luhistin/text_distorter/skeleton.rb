@@ -9,7 +9,7 @@ module Luhistin
 
 			locations.reverse.each do |space|
 			  threshold = (space.to_f) / (txt.length)
-			  propability = adjusted_offset(threshold, curve)
+			  propability = propability_from_curve(threshold, curve)
 
 			  if randomly_selected?(propability)
 			  	txt.slice! space
@@ -36,7 +36,7 @@ module Luhistin
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-      		  propability = adjusted_offset( lines.deep_position_bias(li, wi), curve )
+      		  propability = propability_from_curve( lines.deep_position_bias(li, wi), curve )
 
 		      yield(word, propability)
 
@@ -48,7 +48,8 @@ module Luhistin
       # Find the "bias" (todo: think better names)
       # for randomly determining if the distortion should happen
 
-	  def adjusted_offset(offs, curve)
+	  #def adjusted_offset(offs, curve)
+	  def propability_from_curve(offs, curve)
 	    curve[(curve.length-1)*offs]
       end
 
