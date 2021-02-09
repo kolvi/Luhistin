@@ -4,19 +4,19 @@ module Luhistin
 
       # Use this to remove certain characters from text
 
-	  def remove_chars(chr, txt, curve)
-			locations = txt.indexes_of(chr)
+	  def remove_chars(chr, text, curve)
+			locations = text.indexes_of(chr)
 
 			locations.reverse.each do |space|
-			  threshold = (space.to_f) / (txt.length)
-			  propability = propability_from_curve(threshold, curve)
+			  relative_position = (space.to_f) / (text.length)
+			  propability = propability_from_curve(relative_position, curve)
 
 			  if randomly_selected?(propability)
-			  	txt.slice! space
+			  	text.slice! space
 			  end
 			end
 
-		txt
+		text
 	  end
 
       # This is a convenience function to use, if you
