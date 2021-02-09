@@ -2,7 +2,7 @@ module Luhistin
   class ShufflableString < String
 
     def switch_adjacent_random_letters!
-      first_index = random_int_between(0, self.length-2)
+      first_index = rand(0..(self.length-2))
 
       switch_letters!(first_index, first_index+1)
     end
@@ -34,11 +34,6 @@ module Luhistin
       #
       # https://stackoverflow.com/questions/119107/how-do-i-generate-a-list-of-n-unique-random-numbers-in-ruby
       (min..max).to_a.shuffle.take(amount)  
-    end
-
-    def random_int_between(min, max)
-      # TODO: Throw exception if min > max
-      (min..max).to_a.sample
     end
 
   end
