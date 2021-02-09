@@ -54,12 +54,6 @@ module Luhistin
 		revert_to_string(result)
 	end
 
-	# Convert LineWordList back to multi-line string
-  	# was: revert_wordlines
-	#def to_s
-	#  @word_grid.map { |words_in_line| words_in_line.join(" ") }.join("\n")
-	#end
-
   	private
 
   	def revert_to_string(wordlines)
@@ -80,7 +74,6 @@ module Luhistin
 	    cut_expression = /[^a-zA-ZåäöÅÄÖ#_\@:]{1,5}/
 	    split(cut_expression)
 	end
-
 
   end
 end
