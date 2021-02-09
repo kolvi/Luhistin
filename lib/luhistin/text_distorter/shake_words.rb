@@ -17,15 +17,12 @@ module Luhistin
           return word
         end
 
-        first_letter = word[0]
-        last_letter = word[-1]
         middle_part = word[1..-2]
-
         hardness.times do
           switch_adjacent_random_letters(middle_part)
         end
 
-        first_letter + middle_part + last_letter
+        word[0] + middle_part + word[-1]
       end
 
       def only_letters(word)
