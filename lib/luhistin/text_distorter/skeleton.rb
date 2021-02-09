@@ -17,14 +17,23 @@ module Luhistin
 		txt
 	  end
 
+	  def modify_words(text, curve)
+	  	traverse_each_word(text, curve) do |word, final_bias|
+	  	  if (Random.rand < final_bias)
+	  	  	yield(word)
+	  	  else
+	  	  	word
+	  	  end
+	  	end
+	  end
+
 	  def traverse_each_word(text, curve)
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-		      #the_bias = lines.deep_position_bias(li, wi)
-      		  offset = adjusted_offset( lines.deep_position_bias(li, wi), curve )
+      		  final_bias = adjusted_offset( lines.deep_position_bias(li, wi), curve )
 
-		      yield(word, offset)
+		      yield(word, final_bias)
 
 		    end
 		  end
