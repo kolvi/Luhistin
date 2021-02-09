@@ -2,6 +2,8 @@ module Luhistin
   module TextDistorter
     class Skeleton
 
+      # Use this to remove certain characters from text
+
 	  def remove_chars(chr, txt, curve)
 			locations = txt.indexes_of(chr)
 
@@ -16,6 +18,9 @@ module Luhistin
 
 		txt
 	  end
+
+      # This is a convenience function to use, if you
+      # want to modify text word-by-word basis
 
 	  def modify_some_words(text, curve)
 	  	traverse_each_word(text, curve) do |word, final_bias|
@@ -39,6 +44,9 @@ module Luhistin
 		  end
 		res.revert_wordlines
 	  end
+
+      # Find the "bias" (todo: think better names)
+      # for randomly determining if the distortion should happen
 
 	  def adjusted_offset(offs, curve)
 	    curve[(curve.length-1)*offs]
