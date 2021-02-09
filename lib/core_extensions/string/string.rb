@@ -35,17 +35,11 @@ class String
 
 
   def random_cut_point
-    random_integer_between 1, (length-1)
+    rand(1..(length-1))
   end
 
   def insert_random_space
     insert random_cut_point, " "
-  end
-
-  # TODO: This elsewhere!
-  def random_integer_between(min, max)
-    range = max-min+1
-    (Random.rand*range).floor + min
   end
 
   def indexes_of(chr)

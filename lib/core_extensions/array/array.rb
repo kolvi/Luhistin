@@ -30,7 +30,7 @@ class Array
   def shuffle_further(ind)
     last_ind = length-1
     if (ind < last_ind) # Don't try to shuffle last one
-      new_ind = random_integer_between(ind+1, last_ind)
+      new_ind = rand((ind+1)..last_ind)
 
       #https://coderwall.com/p/be_1va/swap-two-elements-of-an-array-in-ruby
       self[ind], self[new_ind] = self[new_ind], self[ind]
@@ -61,12 +61,5 @@ class Array
       obj[:endline_after] ? "#{word}\n" : word
     end.join(" ").split("\n").map(&:strip).map(&:split)
   end
-
-  # TODO: This is repeated!!!!!!!!!!!!!!!!!!!!!!!!
-
-  def random_integer_between(min, max)
-      range = max-min+1
-      (Random.rand*range).floor + min
-  end  
 
 end
