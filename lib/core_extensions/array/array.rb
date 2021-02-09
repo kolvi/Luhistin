@@ -3,14 +3,6 @@ class Array
     self[0..until_ind].map(&:length).sum
   end
 
-  def position_bias(ind)
-    if (length > 0)
-      (ind.to_f/length)
-    else
-      0
-    end
-  end
-
   def relative_position_of_word(ind_a, ind_b)
     return 0 if self.flatten.length == 0 # border case: empty array
 
