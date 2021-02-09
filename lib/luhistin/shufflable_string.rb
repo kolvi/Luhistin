@@ -5,10 +5,10 @@ module Luhistin
       self.gsub(/[^0-9a-zA-ZåäöÅÄÖ ]/i, '')
     end
 
-    def switch_adjacent_random_letters!(text)
-      first_index = random_int_between(0, text.length-2)
+    def switch_adjacent_random_letters!
+      first_index = random_int_between(0, self.length-2)
 
-      switch_letters!(text, first_index, first_index+1)
+      switch_letters!(first_index, first_index+1)
     end
 
     # NOTE: Is this used at all in code?

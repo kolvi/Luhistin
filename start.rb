@@ -3,7 +3,7 @@ require_relative 'lib/luhistin.rb'
 
 # See what's going on
 
-x = Luhistin::TextDistorter::DoubleLetters.new
-str = "abcd efgh ijklmn opqr"
+x = Luhistin::TextDistorter::ShakeWords.new
+str = "Terve vain sullekin, miten hurisee?"
 curve = [0.8, 1]
 binding.pry
