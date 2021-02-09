@@ -18,9 +18,7 @@ module Luhistin
 		(0..word_objects.length).each do |ind|
 
 		    relative_position = (ind.to_f)/(word_objects.length)
-		    #propability = propability_from_curve(relative_position)
 
-		    #if randomly_selected?(propability)
 		    if randomly_selected?( relative_position )
 		      word_objects.shuffle_further(ind)
 		    end
