@@ -1,12 +1,6 @@
 module Luhistin
   class ShufflableString < String
-
-    def switch_adjacent_random_letters!
-      first_index = rand(0..(self.length-2))
-
-      switch_letters!(first_index, first_index+1)
-    end
-
+=begin
     # NOTE: Is this used at all in code?
     def switch_random_letters!
 
@@ -35,6 +29,6 @@ module Luhistin
       # https://stackoverflow.com/questions/119107/how-do-i-generate-a-list-of-n-unique-random-numbers-in-ruby
       (min..max).to_a.shuffle.take(amount)  
     end
-
+=end
   end
 end
