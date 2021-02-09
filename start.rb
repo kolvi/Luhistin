@@ -11,7 +11,7 @@ b = td::DoubleLetters.new
 c = td::ShakeWords.new
 d = td::ShuffleWords.new
 
-curve = [0.4]
+curve = [0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4]
 
 
 while true do

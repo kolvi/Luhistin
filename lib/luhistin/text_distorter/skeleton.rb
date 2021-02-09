@@ -48,8 +48,8 @@ module Luhistin
       # Find the "bias" (todo: think better names)
       # for randomly determining if the distortion should happen
 
-	  def propability_from_curve(offs, curve)
-	    curve[(curve.length-1)*offs]
+	  def propability_from_curve(x_point, curve)
+	    curve[(curve.length-1)*x_point]
       end
 
       def randomly_selected? (propability)
