@@ -1,12 +1,7 @@
 class String
 
-  # For multi-line string, return an array of lines
-  #
-  def lines
-    split("\n")
-  end
-
-  # Same as above, except lines are also separated to words (two-dimensional array).
+  # Converts multi-line string to array of lines, which consists
+  # array of words (in other words, two-dimensional array of words).
   # This structure allows things like switching places of words, giving
   # paragraphs of texts a "shuffled" feel.
   #
@@ -19,7 +14,7 @@ class String
   # ( any_text == any_text.wordlines.revert_wordlines )
   #
   def wordlines
-    lines.map(&:separate_words)
+    split("\n").map(&:separate_words)
   end
 
   def separate_words
