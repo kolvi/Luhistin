@@ -18,30 +18,56 @@ module Luhistin
 	  #
 
   	def initialize(str)
-  		str.split("\n").map(&:separate_words)
+  		# Technically, it's not a "grid", but I like that word
+  		# and it's snappier than "array of lines and words". :)
+  		#
+  		@word_grid = str.split("\n").map(&:separate_words)
   	end
 
 	def relative_position_of_word(line_ind, word_ind)
-	    #return 0 if self.flatten.length == 0 # border case: there are no words
-
-	    if (line_ind > 0)
-	    	previous_lines = self[0..line_ind-1]
-	    	previous_lines.flatten.length + word_ind
-	    else
+	    return 0 if @word_grid.flatten.length == 0 # border case: empty array
+	    flattened_index = if (line_ind == 0)
 	    	word_ind
+	    else
+	    	no_of_nested_items(line_ind-1) + word_ind
 	    end
+
+	    # Return "relative position" of word = float between 0 and 1)
+	    flattened_index.to_f / @word_grid.flatten.length
+	end
+
+	#
+	# Service function for browsing list word by word, modifying
+	# the words as necessary and getting result (the entire
+	# string) back as a string.
+	#
+
+	def traverse
+		result = @word_grid.map.with_index do |line, li|
+			line.map.with_index do |word, wi|
+      			rel_position = relative_position_of_word(li, wi)
+				yield(word, rel_position)
+			end
+		end
+
+		# Convert result straight away to string 
+		revert_to_string(result)
 	end
 
 	# Convert LineWordList back to multi-line string
   	# was: revert_wordlines
-	def to_s
-	  map { |words_in_line| words_in_line.join(" ") }.join("\n")
-	end
+	#def to_s
+	#  @word_grid.map { |words_in_line| words_in_line.join(" ") }.join("\n")
+	#end
 
   	private
 
+  	def revert_to_string(wordlines)
+  		wordlines.map { |words_in_line| words_in_line.join(" ") }.join("\n")
+  	end
+
 	def no_of_nested_items(last_index_counted)
-	   self[0..last_index_counted].flatten.length
+	   @word_grid[0..last_index_counted].flatten.length
 	end
 
     def separate_words

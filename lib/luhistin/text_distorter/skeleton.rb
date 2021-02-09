@@ -25,17 +25,29 @@ module Luhistin
       # want to modify text word-by-word basis
 
 	  def modify_some_words(text)
-	  	traverse_each_word(text) do |word, rel_position|
+	  	lines = Luhistin::LineWordList.new(text)
+
+	  	lines.traverse do |word, rel_position|
 	  	  if randomly_selected? (rel_position)
 	  	  	yield(word)
 	  	  else
 	  	  	word
 	  	  end
 	  	end
-	  end
 
+#	  	traverse_each_word(text) do |word, rel_position|
+#	  	  if randomly_selected? (rel_position)
+#	  	  	yield(word)
+#	  	  else
+#	  	  	word
+#	  	  end
+#	  	end
+
+	  end
+=begin
 	  def traverse_each_word(text)
-		lines = text.wordlines
+		#lines = text.wordlines
+		lines = Luhistin::LineWordList.new(text)
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
       		  rel_position = lines.relative_position_of_word(li, wi)
@@ -43,10 +55,11 @@ module Luhistin
 		      yield(word, rel_position)
 
 		    end
-		  end
-		res.revert_wordlines
+		end
+		#res.revert_wordlines
+		res.to_s
 	  end
-
+=end
 	  # This can be used to "sprinkle" characters here and there
 	  # to create snazzy-looking text art
 	  def sprinke_chars(text, char_list)
