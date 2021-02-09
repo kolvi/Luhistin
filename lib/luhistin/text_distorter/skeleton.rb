@@ -17,6 +17,19 @@ module Luhistin
 		txt
 	  end
 
+	  def traverse_each_word(text)
+		lines = text.wordlines
+		res = lines.map.with_index do |line, li|
+		    line.map.with_index do |word, wi|
+		      the_bias = lines.deep_position_bias(li, wi)
+
+		      yield(word, the_bias)
+
+		    end
+		  end
+		res.revert_wordlines
+	  end
+
 	  def adjusted_offset(offs, curve)
 	    curve[(curve.length-1)*offs]
       end

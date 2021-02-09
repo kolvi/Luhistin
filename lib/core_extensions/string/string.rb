@@ -42,6 +42,12 @@ class String
     insert random_cut_point, " "
   end
 
+  # TODO: This elsewhere!
+  def random_integer_between(min, max)
+    range = max-min+1
+    (Random.rand*range).floor + min
+  end
+
   def indexes_of(chr)
     index_list = [[]]
     (index_list + split(Regexp.new(chr))[0..-2]).inject do |indexes, str|
