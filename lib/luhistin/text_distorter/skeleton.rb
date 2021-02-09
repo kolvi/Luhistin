@@ -48,7 +48,6 @@ module Luhistin
       # Find the "bias" (todo: think better names)
       # for randomly determining if the distortion should happen
 
-	  #def adjusted_offset(offs, curve)
 	  def propability_from_curve(offs, curve)
 	    curve[(curve.length-1)*offs]
       end
