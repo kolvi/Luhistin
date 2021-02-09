@@ -18,7 +18,7 @@ module Luhistin
 		    thresh = (ind.to_f)/(word_objects.length)
 		    real_offset = adjusted_offset(thresh, curve)
 
-		    if (Random.rand < real_offset)
+		    if randomly_selected?(real_offset)
 		      word_objects.shuffle_further(ind)
 		    end
 		end
