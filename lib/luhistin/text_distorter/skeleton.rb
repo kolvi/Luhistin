@@ -47,8 +47,31 @@ module Luhistin
 		res.revert_wordlines
 	  end
 
-      # Find the "bias" (todo: think better names)
-      # for randomly determining if the distortion should happen
+	  # This can be used to "sprinkle" characters here and there
+	  # to create snazzy-looking text art
+	  def sprinke_chars(text, characters)
+	  	  # characters can be either array or string
+
+		  char_list = (characters.is_a? String) ? (characters.chars) : (characters)
+
+		  chunk_length = text.length / @curve.length
+		  chunks = text.chars.each_slice(chunk_length).map(&:join)
+
+		  chunks.map.with_index do |chunk, ind|
+		    # There is most likely one chunk more than there are
+		    # indexes at "curves", since split is not even 
+
+		    rel_position = ind / chunks.length
+
+		    (0..chunk.length-1).to_a.reverse.each do |c_ind|
+		      if randomly_selected? (rel_position)
+		        chunk.insert(c_ind, "#{char_list.sample}")
+		      end
+		    end
+		    chunk
+		  end.join
+	  end
+
 
       def randomly_selected? (relative_position)
       	Random.rand < propability_from_curve( relative_position )
