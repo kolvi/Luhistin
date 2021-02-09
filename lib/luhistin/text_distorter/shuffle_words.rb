@@ -19,7 +19,6 @@ module Luhistin
 		    relative_position = (ind.to_f)/(word_objects.length)
 
 		    if randomly_selected?( relative_position )
-		      #word_objects.shuffle_further(ind)
 		      shuffle_further(word_objects, ind)
 		    end
 		end
