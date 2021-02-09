@@ -3,7 +3,9 @@ module Luhistin
     class RemoveNewlines < Skeleton
 
       def distort(text, curve)
-      	remove_chars "\n", text, curve
+        @curve = curve
+
+      	remove_chars "\n", text
       end
 
     end

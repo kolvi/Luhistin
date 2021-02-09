@@ -3,20 +3,22 @@ module Luhistin
     class ShuffleWords < Skeleton
 
       def distort(text, curve)
+	      @curve = curve
+
 		  word_objects = text.wordlines.indexify
-		  linear_shuffle(word_objects, curve)
+		  linear_shuffle(word_objects)
 
 		  word_objects.deindexify.revert_wordlines
       end
 
       private
 
-      def linear_shuffle(word_objects, curve)
+      def linear_shuffle(word_objects)
 
 		(0..word_objects.length).each do |ind|
 
 		    relative_position = (ind.to_f)/(word_objects.length)
-		    propability = propability_from_curve(relative_position, curve)
+		    propability = propability_from_curve(relative_position)
 
 		    if randomly_selected?(propability)
 		      word_objects.shuffle_further(ind)

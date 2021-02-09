@@ -3,7 +3,9 @@ module Luhistin
     class RemoveSpaces < Skeleton
 
       def distort(text, curve)
-      	remove_chars " ", text, curve
+        @curve = curve
+
+      	remove_chars " ", text
       end
 
     end

@@ -2,14 +2,19 @@ module Luhistin
   module TextDistorter
     class Skeleton
 
+      def initialize
+      	@curve = nil
+      end
+
+
       # Use this to remove certain characters from text
 
-	  def remove_chars(chr, text, curve)
+	  def remove_chars(chr, text)
 			locations = text.indexes_of(chr)
 
 			locations.reverse.each do |space|
 			  relative_position = (space.to_f) / (text.length)
-			  propability = propability_from_curve(relative_position, curve)
+			  propability = propability_from_curve(relative_position)
 
 			  if randomly_selected?(propability)
 			  	text.slice! space
@@ -22,8 +27,8 @@ module Luhistin
       # This is a convenience function to use, if you
       # want to modify text word-by-word basis
 
-	  def modify_some_words(text, curve)
-	  	traverse_each_word(text, curve) do |word, propability|
+	  def modify_some_words(text)
+	  	traverse_each_word(text) do |word, propability|
 	  	  if randomly_selected? (propability)
 	  	  	yield(word)
 	  	  else
@@ -32,11 +37,11 @@ module Luhistin
 	  	end
 	  end
 
-	  def traverse_each_word(text, curve)
+	  def traverse_each_word(text)
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-      		  propability = propability_from_curve( lines.relative_position_of_word(li, wi), curve )
+      		  propability = propability_from_curve( lines.relative_position_of_word(li, wi) )
 
 		      yield(word, propability)
 
@@ -48,8 +53,8 @@ module Luhistin
       # Find the "bias" (todo: think better names)
       # for randomly determining if the distortion should happen
 
-	  def propability_from_curve(x_point, curve)
-	    curve[(curve.length-1)*x_point]
+	  def propability_from_curve(x_point)
+	    @curve[(@curve.length-1)*x_point]
       end
 
       def randomly_selected? (propability)

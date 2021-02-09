@@ -3,7 +3,9 @@ module Luhistin
     class ShakeWords < Skeleton
 
       def distort(text, curve)
-        modify_some_words(text, curve) do |word|
+        @curve = curve
+
+        modify_some_words(text) do |word|
           mangle(word, 8) 
         end
       end
