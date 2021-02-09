@@ -36,7 +36,7 @@ module Luhistin
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-      		  propability = propability_from_curve( lines.deep_position_bias(li, wi), curve )
+      		  propability = propability_from_curve( lines.relative_position_of_word(li, wi), curve )
 
 		      yield(word, propability)
 

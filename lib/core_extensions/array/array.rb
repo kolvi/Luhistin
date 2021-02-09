@@ -11,7 +11,7 @@ class Array
     end
   end
 
-  def deep_position_bias(ind_a, ind_b)
+  def relative_position_of_word(ind_a, ind_b)
     return 0 if self.flatten.length == 0 # border case: empty array
 
     if (ind_a > 0)
