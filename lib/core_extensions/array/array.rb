@@ -1,7 +1,4 @@
 class Array
-  def no_of_nested_items(until_ind)
-    self[0..until_ind].map(&:length).sum
-  end
 
   def relative_position_of_word(ind_a, ind_b)
     return 0 if self.flatten.length == 0 # border case: empty array
@@ -42,6 +39,10 @@ class Array
       word = obj[:word]
       obj[:endline_after] ? "#{word}\n" : word
     end.join(" ").split("\n").map(&:strip).map(&:split)
+  end
+
+  def no_of_nested_items(until_ind)
+    self[0..until_ind].map(&:length).sum
   end
 
 end
