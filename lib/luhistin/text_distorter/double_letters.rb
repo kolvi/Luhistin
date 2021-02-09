@@ -3,17 +3,14 @@ module Luhistin
     class DoubleLetters < Skeleton
 
       def distort(text, curve)
-      	traverse_each_word(text, curve) do |word, relative_pos|
-		      offset = adjusted_offset(relative_pos, curve)
-
-	        if (word.length > 3 && Random.rand < offset)
-	          dup_point = word.random_cut_point
-	          word.insert(dup_point, word[dup_point])
-	        else
-	          word
-	        end
-
-      	end
+        modify_some_words(text, curve) do |word|
+          if (word.length > 3)
+            dup_point = word.random_cut_point
+            word.insert(dup_point, word[dup_point])
+          else
+            word
+          end
+        end
       end
 
     end

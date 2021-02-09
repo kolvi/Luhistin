@@ -9,7 +9,7 @@ a = Luhistin::TextDistorter::ChopWords.new
 b = Luhistin::TextDistorter::DoubleLetters.new
 c = Luhistin::TextDistorter::ShakeWords.new
 
-curve = [0.8, 1]
+curve = [0.4]
 
 
 while true do
@@ -23,5 +23,5 @@ while true do
  puts "ShakeWords"
  puts c.distort(str.dup, curve)
  puts
- sleep 0.35
+ sleep 1
 end
