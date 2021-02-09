@@ -49,11 +49,7 @@ module Luhistin
 
 	  # This can be used to "sprinkle" characters here and there
 	  # to create snazzy-looking text art
-	  def sprinke_chars(text, characters)
-	  	  # characters can be either array or string
-
-		  char_list = (characters.is_a? String) ? (characters.chars) : (characters)
-
+	  def sprinke_chars(text, char_list)
 		  chunk_length = text.length / @curve.length
 		  chunks = text.chars.each_slice(chunk_length).map(&:join)
 

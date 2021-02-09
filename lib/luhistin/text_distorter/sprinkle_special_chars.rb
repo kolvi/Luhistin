@@ -5,7 +5,7 @@ module Luhistin
       def distort(text, curve)
       	@curve = curve
 
-        sprinke_chars(text, "!€%&/£$∞§|°§")
+        sprinke_chars(text, "!€%&/£$∞§|°§".chars)
       end
 
     end
