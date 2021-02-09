@@ -9,9 +9,9 @@ module Luhistin
 
 			locations.reverse.each do |space|
 			  threshold = (space.to_f) / (txt.length)
-			  bias = adjusted_offset(threshold, curve)
+			  propability = adjusted_offset(threshold, curve)
 
-			  if (Random.rand < bias)
+			  if randomly_selected?(propability)
 			  	txt.slice! space
 			  end
 			end
@@ -23,8 +23,8 @@ module Luhistin
       # want to modify text word-by-word basis
 
 	  def modify_some_words(text, curve)
-	  	traverse_each_word(text, curve) do |word, final_bias|
-	  	  if (Random.rand < final_bias)
+	  	traverse_each_word(text, curve) do |word, propability|
+	  	  if randomly_selected? (propability)
 	  	  	yield(word)
 	  	  else
 	  	  	word
@@ -50,6 +50,10 @@ module Luhistin
 
 	  def adjusted_offset(offs, curve)
 	    curve[(curve.length-1)*offs]
+      end
+
+      def randomly_selected? (propability)
+      	Random.rand < propability
       end
 
     end
