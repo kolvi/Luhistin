@@ -15,11 +15,10 @@ module Luhistin
 
 		(0..word_objects.length).each do |ind|
 
-		    thresh = (ind.to_f)/(word_objects.length)
-		    real_offset = propability_from_curve(thresh, curve)
+		    relative_position = (ind.to_f)/(word_objects.length)
+		    propability = propability_from_curve(relative_position, curve)
 
-
-		    if randomly_selected?(real_offset)
+		    if randomly_selected?(propability)
 		      word_objects.shuffle_further(ind)
 		    end
 		end
