@@ -62,4 +62,11 @@ class Array
     end.join(" ").split("\n").map(&:strip).map(&:split)
   end
 
+  # TODO: This is repeated!!!!!!!!!!!!!!!!!!!!!!!!
+
+  def random_integer_between(min, max)
+      range = max-min+1
+      (Random.rand*range).floor + min
+  end  
+
 end

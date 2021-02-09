@@ -5,9 +5,11 @@ require_relative 'lib/luhistin.rb'
 
 str = "Terve vain sullekin, miten hurisee?"
 
-a = Luhistin::TextDistorter::ChopWords.new
-b = Luhistin::TextDistorter::DoubleLetters.new
-c = Luhistin::TextDistorter::ShakeWords.new
+td = Luhistin::TextDistorter
+a = td::ChopWords.new
+b = td::DoubleLetters.new
+c = td::ShakeWords.new
+d = td::ShuffleWords.new
 
 curve = [0.4]
 
@@ -22,6 +24,9 @@ while true do
  puts
  puts "ShakeWords"
  puts c.distort(str.dup, curve)
+ puts
+ puts "ShuffleWords"
+ puts d.distort(str.dup, curve)
  puts
  sleep 1
 end
