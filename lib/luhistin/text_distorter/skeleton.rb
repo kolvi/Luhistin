@@ -36,9 +36,9 @@ module Luhistin
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-      		  final_bias = adjusted_offset( lines.deep_position_bias(li, wi), curve )
+      		  propability = adjusted_offset( lines.deep_position_bias(li, wi), curve )
 
-		      yield(word, final_bias)
+		      yield(word, propability)
 
 		    end
 		  end
