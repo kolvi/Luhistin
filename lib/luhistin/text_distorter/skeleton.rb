@@ -11,9 +11,9 @@ module Luhistin
 			locations = text.indexes_of(chr)
 
 			locations.reverse.each do |space|
-			  relative_position = (space.to_f) / (text.length)
+			  rel_position = (space.to_f) / (text.length)
 
-			  if randomly_selected?(relative_position)
+			  if randomly_selected?(rel_position)
 			  	text.slice! space
 			  end
 			end
@@ -25,8 +25,8 @@ module Luhistin
       # want to modify text word-by-word basis
 
 	  def modify_some_words(text)
-	  	traverse_each_word(text) do |word, relative_position|
-	  	  if randomly_selected? (relative_position)
+	  	traverse_each_word(text) do |word, rel_position|
+	  	  if randomly_selected? (rel_position)
 	  	  	yield(word)
 	  	  else
 	  	  	word
@@ -38,9 +38,9 @@ module Luhistin
 		lines = text.wordlines
 		res = lines.map.with_index do |line, li|
 		    line.map.with_index do |word, wi|
-      		  relative_position = lines.relative_position_of_word(li, wi)
+      		  rel_position = lines.relative_position_of_word(li, wi)
 
-		      yield(word, relative_position)
+		      yield(word, rel_position)
 
 		    end
 		  end
