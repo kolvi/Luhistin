@@ -26,7 +26,7 @@ class Array
   def revert_wordlines
     map { |wordlist| wordlist.join(" ") }.join("\n")
   end
-
+=begin
   def shuffle_further(ind)
     last_ind = length-1
     if (ind < last_ind) # Don't try to shuffle last one
@@ -36,7 +36,7 @@ class Array
       self[ind], self[new_ind] = self[new_ind], self[ind]
     end
   end
-
+=end
   def indexify
     map.with_index do |line, l_index|
       if (l_index == 0)
