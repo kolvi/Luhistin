@@ -3,11 +3,8 @@ module Luhistin
     class ShakeWords < Skeleton
 
       def distort(text, curve)
-        traverse_each_word(text, curve) do |word, relative_pos|
-          offset = adjusted_offset(relative_pos, curve)
-
-          # Shake the word
-          (Random.rand < offset) ? mangle(word, 8) : word
+        modify_some_words(text, curve) do |word|
+          mangle(word, 8) 
         end
       end
 
