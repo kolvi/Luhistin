@@ -1,10 +1,6 @@
 module Luhistin
   class ShufflableString < String
 
-    def only_letters
-      self.gsub(/[^0-9a-zA-ZåäöÅÄÖ ]/i, '')
-    end
-
     def switch_adjacent_random_letters!
       first_index = random_int_between(0, self.length-2)
 
