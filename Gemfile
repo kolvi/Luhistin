@@ -7,3 +7,4 @@ source 'https://rubygems.org'
 # end
 
 gem 'pry'
+gem 'rspec'
