@@ -7,4 +7,3 @@ end
 task :default do
   Rake::Task["test"].execute
 end
-

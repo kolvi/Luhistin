@@ -1,18 +1,17 @@
 module Luhistin
   module TextDistorter
     class ShakeWords < Skeleton
-
       def distort(text, curve)
         @curve = curve
 
         modify_some_words(text) do |word|
-          mangle(word, 8) 
+          mangle(word, 8)
         end
       end
 
       private
 
-      def mangle(word, hardness=1)
+      def mangle(word, hardness = 1)
         if (only_letters(word).length < 4)
           return word
         end
@@ -30,13 +29,12 @@ module Luhistin
       end
 
       def switch_adjacent_random_letters(word)
-        leftmost_letter_index = rand(0..(word.length-2))
+        leftmost_letter_index = rand(0..(word.length - 2))
         a = leftmost_letter_index   # just to make the next command shorter
 
         # Switch two letters in place
-        word[a], word[a+1] = word[a+1], word[a]
+        word[a], word[a + 1] = word[a + 1], word[a]
       end
-
     end
   end
 end

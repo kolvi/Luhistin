@@ -1,7 +1,6 @@
 module Luhistin
   module TextDistorter
     class DoubleLetters < Skeleton
-
       def distort(text, curve)
         @curve = curve
 
@@ -18,9 +17,8 @@ module Luhistin
 
       def duplicate_some_letter(word)
         selected_letter_indx = word.random_cut_point
-        word.insert( selected_letter_indx, word[selected_letter_indx] )
+        word.insert(selected_letter_indx, word[selected_letter_indx])
       end
-
     end
   end
 end
