@@ -3,6 +3,11 @@ require 'luhistin'
 describe Luhistin::TextDistorter::Skeleton do
 
   it "finds right propabilities from one-value curve" do
+  	#
+  	# Results should be as following.
+  	#
+  	# 0 <= x_point <= 1: 0.6
+  	#
   	subject.curve = [0.6]
   	result_a = subject.propability_from_curve(0)
   	result_b = subject.propability_from_curve(1)
@@ -14,6 +19,14 @@ describe Luhistin::TextDistorter::Skeleton do
   end
 
   it "finds right propabilities from two-value curve" do
+
+  	#
+  	# Results should be as following.
+  	#
+  	# 0 <= x_point < 0.5: 0.2
+  	# 0.5 <= x_point <= 1: 1
+  	#
+
   	subject.curve = [0.2, 1]
   	result_a = subject.propability_from_curve(0)
   	result_b = subject.propability_from_curve(0.5)
