@@ -26,7 +26,5 @@ module Luhistin
   		{ word: word, endline_after: true }
   	end
 
-  	# TODO: Create "Include" file for line_word_list.rb and word_chain.rb to share
-
   end
 end
