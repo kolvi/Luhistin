@@ -3,9 +3,6 @@ module Luhistin
     include WordGrid
 
   	def initialize(str)
-  		# Technically, it's not a "grid", but I like that word
-  		# and it's snappier than "array of lines and words". :)
-  		#
   		create_word_grid(str).map do |line|
 			wordlist_to_word_hashes(line)
 		end.flatten
