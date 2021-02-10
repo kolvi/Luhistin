@@ -1,5 +1,6 @@
 module Luhistin
-  class LineWordList < Array
+  class LineWordList
+      include WordGrid
 
   	  # The constructor:
   	  #
@@ -18,10 +19,7 @@ module Luhistin
 	  #
 
   	def initialize(str)
-  		# Technically, it's not a "grid", but I like that word
-  		# and it's snappier than "array of lines and words". :)
-  		#
-  		@word_grid = str.split("\n").map(&:separate_words)
+  		@word_grid = create_word_grid(str)
   	end
 
 	def relative_position_of_word(line_ind, word_ind)
@@ -62,17 +60,6 @@ module Luhistin
 
 	def no_of_nested_items(last_index_counted)
 	   @word_grid[0..last_index_counted].flatten.length
-	end
-
-    def separate_words
-	  	# The following expression finds parts of a text which can be
-	  	# considered "word boundaries". Most often they are spaces,
-	  	# but the expression handles a bit dirtier input data, looking for
-	  	# "1-5 long sequence of chars that are not letters, underscores
-	  	# nor '@' or ':' signs".
-
-	    cut_expression = /[^a-zA-ZåäöÅÄÖ#_\@:]{1,5}/
-	    split(cut_expression)
 	end
 
   end
