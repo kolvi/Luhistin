@@ -8,7 +8,8 @@ module Luhistin
 
       # Use this to remove certain characters from text
 	  def remove_chars(chr, text)
-			locations = text.indexes_of(chr)
+			#locations = text.indexes_of(chr)
+			locations = indexes_of(chr, text)
 
 			locations.reverse.each do |space|
 			  rel_position = (space.to_f) / (text.length)
@@ -65,6 +66,13 @@ module Luhistin
 	  def propability_from_curve(x_point)
 	    @curve[(@curve.length-1)*x_point]
       end
+
+	  def indexes_of(chr, text)
+	    index_list = [[]]
+	    (index_list + text.split(Regexp.new(chr))[0..-2]).inject do |indexes, str|
+	      indexes.empty? ? [str.length] : (indexes + [indexes.last+str.length+1])
+	    end
+	  end
 
     end
   end
