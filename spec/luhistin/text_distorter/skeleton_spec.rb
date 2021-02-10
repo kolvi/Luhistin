@@ -2,8 +2,26 @@ require 'luhistin'
 
 describe Luhistin::TextDistorter::Skeleton do
 
-  it "is skeletal" do
-    expect(1).to eq(1)
+  it "finds right propabilities from one-value curve" do
+  	subject.curve = [0.6]
+  	result_a = subject.propability_from_curve(0)
+  	result_b = subject.propability_from_curve(1)
+  	result_c = subject.propability_from_curve(0.47)
+
+  	expect(result_a).to eq(0.6)
+  	expect(result_b).to eq(0.6)
+  	expect(result_c).to eq(0.6)
+  end
+
+  it "finds right propabilities from two-value curve" do
+  	subject.curve = [0.2, 1]
+  	result_a = subject.propability_from_curve(0)
+  	result_b = subject.propability_from_curve(0.5)
+  	result_c = subject.propability_from_curve(1)
+
+  	expect(result_a).to eq(0.2)
+  	expect(result_b).to eq(1)
+  	expect(result_c).to eq(1)
   end
 
   it "finds right propabilities from five-stage curve" do
