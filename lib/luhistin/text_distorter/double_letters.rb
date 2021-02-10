@@ -1,6 +1,8 @@
 module Luhistin
   module TextDistorter
     class DoubleLetters < Skeleton
+      include WordTraverser
+
       def distort(text, curve)
         super
 

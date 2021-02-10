@@ -1,6 +1,7 @@
 module Luhistin
   module TextDistorter
     class BlowSpacesToText < Skeleton
+      include CharacterSprinkler
       def distort(text, curve)
         super
 

@@ -1,9 +1,6 @@
 module Luhistin
   module TextDistorter
     class Skeleton
-      include WordTraverser
-      include CharacterRemover
-      include CharacterSprinkler
 
       attr_accessor :curve
 

@@ -1,6 +1,8 @@
 module Luhistin
   module TextDistorter
     class ChopWords < Skeleton
+      include WordTraverser
+      
       def distort(text, curve)
         super
 
