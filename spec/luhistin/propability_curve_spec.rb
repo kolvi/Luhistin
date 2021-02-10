@@ -8,9 +8,9 @@ describe Luhistin::PropabilityCurve do
     # 0 <= x_point <= 1: 0.6
     #
     subject.curve_y_values = [0.6]
-    result_a = subject.propability_from_curve(0)
-    result_b = subject.propability_from_curve(1)
-    result_c = subject.propability_from_curve(0.47)
+    result_a = subject.propability_reading(0)
+    result_b = subject.propability_reading(1)
+    result_c = subject.propability_reading(0.47)
 
     expect(result_a).to eq(0.6)
     expect(result_b).to eq(0.6)
@@ -26,10 +26,10 @@ describe Luhistin::PropabilityCurve do
     #
 
     subject.curve_y_values = [0.2, 1]
-    result_a = subject.propability_from_curve(0)
-    result_b = subject.propability_from_curve(0.5)
-    result_c = subject.propability_from_curve(1)
-    result_d = subject.propability_from_curve(0.298)
+    result_a = subject.propability_reading(0)
+    result_b = subject.propability_reading(0.5)
+    result_c = subject.propability_reading(1)
+    result_d = subject.propability_reading(0.298)
 
     expect(result_a).to eq(0.2)
     expect(result_b).to eq(1)
@@ -50,13 +50,13 @@ describe Luhistin::PropabilityCurve do
 
     subject.curve_y_values = [0.314, 0.109, 0.92, 0.78, 0.559]
 
-    prop_zero = subject.propability_from_curve(0)
-    prop_zero_six = subject.propability_from_curve(0.6)
-    prop_zero_eight = subject.propability_from_curve(0.8)
-    prop_one = subject.propability_from_curve(1)
+    prop_zero = subject.propability_reading(0)
+    prop_zero_six = subject.propability_reading(0.6)
+    prop_zero_eight = subject.propability_reading(0.8)
+    prop_one = subject.propability_reading(1)
 
-    prop_zero_threeplus = subject.propability_from_curve(0.32)
-    prop_zero_sevenplus = subject.propability_from_curve(0.734)
+    prop_zero_threeplus = subject.propability_reading(0.32)
+    prop_zero_sevenplus = subject.propability_reading(0.734)
 
     expect(prop_zero).to eq(0.314)
     expect(prop_zero_six).to eq(0.78)

@@ -64,7 +64,7 @@ module Luhistin
       end
 
       def randomly_selected?(relative_position)
-        Random.rand < @curve.propability_from_curve(relative_position)
+        Random.rand < @curve.propability_reading(relative_position)
       end
 
     end

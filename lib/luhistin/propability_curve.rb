@@ -6,7 +6,7 @@ module Luhistin
   	  @curve_y_values = curve_y
   	end
 
-	def propability_from_curve(x_point)
+	def propability_reading(x_point)
 	    if (x_point == 1)
 	      # Border case: for number one, return last index
 	      # since using formula would return too large a value
