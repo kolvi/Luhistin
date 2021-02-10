@@ -2,8 +2,6 @@
 require 'rspec'
 require_relative '../lib/luhistin.rb'
 
-# TODO: Write tests!!!!
-# This is just a starting "stub".
 
 describe Luhistin::TextTool::CharacterIndexFinder do
 
@@ -49,7 +47,5 @@ describe Luhistin::TextTool::CharacterIndexFinder do
   		subject.indexes_of(:this_aint_a_string, "x")
   	end.to raise_error(ArgumentError, "Text is not string")
   end
-
-#
 
 end
