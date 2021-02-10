@@ -69,7 +69,8 @@ module Luhistin
 
 	  def indexes_of(chr, text)
 	    index_list = [[]]
-	    (index_list + text.split(Regexp.new(chr))[0..-2]).inject do |indexes, str|
+	    character_finder = Regexp.new(chr)
+	    (index_list + text.split(character_finder)[0..-2]).inject do |indexes, str|
 	      indexes.empty? ? [str.length] : (indexes + [indexes.last+str.length+1])
 	    end
 	  end
