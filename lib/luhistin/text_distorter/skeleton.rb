@@ -2,6 +2,8 @@ module Luhistin
   module TextDistorter
     class Skeleton
       include WordTraverser
+      include CharacterRemover
+      include CharacterSprinkler
 
       attr_accessor :curve
 
@@ -11,43 +13,6 @@ module Luhistin
 
       def distort(text, curve)
       	@curve = Luhistin::PropabilityCurve.new(curve)
-      end
-
-      # Use this to remove certain characters from text
-      def remove_chars(chr, text)
-        index_finder = Luhistin::TextTool::CharacterIndexFinder.new
-        locations = index_finder.indexes_of(text, chr)
-
-        locations.reverse.each do |space|
-          rel_position = (space.to_f) / (text.length)
-
-          if randomly_selected?(rel_position)
-            text.slice! space
-          end
-        end
-
-        text
-      end
-
-      # This can be used to "sprinkle" characters here and there
-      # to create snazzy-looking text art
-      def sprinke_chars(text, char_list)
-        chunk_length = text.length / @curve.curve_y_values.length
-        chunks = text.chars.each_slice(chunk_length).map(&:join)
-
-        chunks.map.with_index do |chunk, ind|
-          # There is most likely one chunk more than there are
-          # indexes at "curves", since split is not even
-
-          rel_position = ind / chunks.length
-
-          (0..chunk.length - 1).to_a.reverse.each do |c_ind|
-            if randomly_selected? (rel_position)
-              chunk.insert(c_ind, "#{char_list.sample}")
-            end
-          end
-          chunk
-        end.join
       end
 
       def randomly_selected?(relative_position)
