@@ -32,10 +32,10 @@ module Luhistin
 	      raise ArgumentError, "Character is not string"
 	    else
           raise ArgumentError, "More than one character supplied" if (chr.length > 1)
-          raise ArgumentError, "No characters supplied" if (chr.length == 1)
+          raise ArgumentError, "No character supplied" if (chr.length == 0)
 	    end
 
-	    if (chr.class != String)
+	    if (text.class != String)
 	      raise ArgumentError, "Text is not string"
 	    end
 	  end
