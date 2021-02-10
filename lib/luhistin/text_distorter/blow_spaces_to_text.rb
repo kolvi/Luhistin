@@ -2,7 +2,7 @@ module Luhistin
   module TextDistorter
     class BlowSpacesToText < Skeleton
       def distort(text, curve)
-        @curve = curve
+        super
 
         sprinke_chars(text, [" ", "  ", "   ", "    "])
       end

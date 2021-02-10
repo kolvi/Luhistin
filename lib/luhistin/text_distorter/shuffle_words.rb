@@ -2,7 +2,7 @@ module Luhistin
   module TextDistorter
     class ShuffleWords < Skeleton
       def distort(text, curve)
-        @curve = curve
+        super
 
         word_chain = Luhistin::WordChain.new(text)
         linear_shuffle(word_chain.word_hash_list)

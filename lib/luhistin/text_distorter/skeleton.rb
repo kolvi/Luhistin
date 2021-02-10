@@ -7,6 +7,11 @@ module Luhistin
         @curve = nil
       end
 
+      def distort(text, curve)
+      	#@curve = Luhistin::PropabilityCurve.new(curve)
+        @curve = curve
+      end
+
       # Use this to remove certain characters from text
       def remove_chars(chr, text)
         index_finder = Luhistin::TextTool::CharacterIndexFinder.new

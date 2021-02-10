@@ -2,7 +2,7 @@ module Luhistin
   module TextDistorter
     class DoubleLetters < Skeleton
       def distort(text, curve)
-        @curve = curve
+        super
 
         modify_some_words(text) do |word|
           if (word.length > 3)

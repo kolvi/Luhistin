@@ -2,7 +2,7 @@ module Luhistin
   module TextDistorter
     class ChopWords < Skeleton
       def distort(text, curve)
-        @curve = curve
+        super
 
         modify_some_words(text) do |word|
           insert_random_space(word)
