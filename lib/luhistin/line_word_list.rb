@@ -1,22 +1,6 @@
 module Luhistin
   class LineWordList
-      include WordGrid
-
-  	  # The constructor:
-  	  #
-	  # Converts multi-line string to array of lines, which consists
-	  # array of words (in other words, two-dimensional array of words).
-	  # This structure allows things like switching places of words, giving
-	  # paragraphs of texts a "shuffled" feel.
-	  #
-	  # example_text = "Hello world\nHow are you"
-	  # example_text.wordlines == [["Hello, "world"], ["How", "are", "you"]]
-	  #
-	  # Array-class has method "revert_wordlines" whichs reverts this functionality,
-	  # returning the original string.
-	  #
-	  # ( any_text == any_text.wordlines.revert_wordlines )
-	  #
+    include WordGrid
 
   	def initialize(str)
   		@word_grid = create_word_grid(str)
