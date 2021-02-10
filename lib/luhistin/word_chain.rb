@@ -10,7 +10,7 @@ module Luhistin
 		end.flatten
   	end
 
-  	def revert_to_string
+  	def to_s
   		@word_hash_list.inject("") do |result, word_hash|
 	      word = word_hash[:word]
 	      separator = word_hash[:endline_after] ? "\n" : " "
