@@ -8,6 +8,8 @@ source 'https://rubygems.org'
 
 gem 'pry'
 gem 'rake'
+gem 'rubocop', '~> 1.9', require: false
+
 group :development, :test do
   gem 'rspec'
 end
