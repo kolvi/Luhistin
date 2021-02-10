@@ -7,4 +7,7 @@ source 'https://rubygems.org'
 # end
 
 gem 'pry'
-gem 'rspec'
+gem 'rake'
+group :development, :test do
+  gem 'rspec'
+end
