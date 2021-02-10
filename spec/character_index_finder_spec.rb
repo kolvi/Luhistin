@@ -1,7 +1,4 @@
-# TODO: Needed to require here?
-require 'rspec'
-require_relative '../lib/luhistin.rb'
-
+require 'luhistin'
 
 describe Luhistin::TextTool::CharacterIndexFinder do
 
