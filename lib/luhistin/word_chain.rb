@@ -2,10 +2,20 @@ module Luhistin
   class WordChain
     include WordGrid
 
+    attr_reader :word_hash_list
+
   	def initialize(str)
-  		create_word_grid(str).map do |line|
+  		@word_hash_list = create_word_grid(str).map do |line|
 			wordlist_to_word_hashes(line)
 		end.flatten
+  	end
+
+  	def revert_to_string
+  		@word_hash_list.inject("") do |result, word_hash|
+	      word = word_hash[:word]
+	      separator = word_hash[:endline_after] ? "\n" : " "
+  		  result + word + separator
+  		end
   	end
 
   	private
