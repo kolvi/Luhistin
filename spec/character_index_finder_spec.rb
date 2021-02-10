@@ -5,11 +5,11 @@ require_relative '../lib/luhistin.rb'
 
 describe Luhistin::TextTool::CharacterIndexFinder do
 
-  it "findex character indexes for a simple string" do
+  it "finds matching characters for a simple string" do
     expect(subject.indexes_of("moikka", "k")).to eq([3,4])
   end
 
-  it "findex character indexes for a string with matches at start and end" do
+  it "finds matching characters for a string with matches at start and end" do
     expect(subject.indexes_of("pkiopikp", "p")).to eq([0,4,7])
   end
 
