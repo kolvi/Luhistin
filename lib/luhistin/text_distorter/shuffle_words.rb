@@ -5,11 +5,9 @@ module Luhistin
       def distort(text, curve)
 	      @curve = curve
 
-		  #word_chain = text.wordlines.indexify
 		  word_chain = Luhistin::WordChain.new(text)
 		  linear_shuffle(word_chain.word_hash_list)
 
-		  #word_chain.deindexify.revert_wordlines
 		  word_chain.revert_to_string
       end
 
