@@ -1,3 +1,5 @@
+require_relative "mixin/all"
+
 require_relative "skeleton"
 require_relative "chop_words"
 require_relative "double_letters"

@@ -23,7 +23,7 @@ curve = [0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.2, 0.3, 0.4, 0.3, 0
 # curve = [0.1, 0.5, 1]
 # curve = [1]
 
-binding.pry
+# binding.pry
 
 while true do
   system("clear")
