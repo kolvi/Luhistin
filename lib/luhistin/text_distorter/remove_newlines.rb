@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class RemoveNewlines < Skeleton
+    class RemoveNewlines < CurveDistorter
       include CharacterRemover
 
       def distort(text, curve)

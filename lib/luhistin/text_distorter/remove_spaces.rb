@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class RemoveSpaces < Skeleton
+    class RemoveSpaces < CurveDistorter
       include CharacterRemover
       
       def distort(text, curve)

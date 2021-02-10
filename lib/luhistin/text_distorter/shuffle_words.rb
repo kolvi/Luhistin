@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class ShuffleWords < Skeleton
+    class ShuffleWords < CurveDistorter
       def distort(text, curve)
         super
 

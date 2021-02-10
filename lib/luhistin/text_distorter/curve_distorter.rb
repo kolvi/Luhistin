@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class Skeleton
+    class CurveDistorter
 
       attr_accessor :curve
 

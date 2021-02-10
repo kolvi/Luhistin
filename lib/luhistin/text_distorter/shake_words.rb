@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class ShakeWords < Skeleton
+    class ShakeWords < CurveDistorter
       include WordTraverser
 
       def distort(text, curve)

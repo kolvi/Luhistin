@@ -1,6 +1,6 @@
 module Luhistin
   module TextDistorter
-    class SprinkleNumbers < Skeleton
+    class SprinkleNumbers < CurveDistorter
       include CharacterSprinkler
 
       def distort(text, curve)
