@@ -68,13 +68,56 @@ module Luhistin
       end
 
 	  def indexes_of(chr, text)
+	  	 	# Border case - to prevent infinite loop.
+	  	 	# (Actually this should be exception, since this is an error.)
+	  		return [] if chr.empty?
+
+		  	indexes = []
+		    buffer = text.dup
+
+		    # Note: This is a pretty "old-school" method of traversing
+		    # through string, but imho MUCH cleaner than some
+		    # inject magic with regexes
+
+		    while true do
+		   	  if (next_occasion = buffer.index(chr))
+		   	  	buffer.slice!(0, next_occasion+1)
+
+		   	  	next_occasion += (indexes.last+1) unless indexes.empty?
+		   	  	indexes.push(next_occasion)
+		   	  else
+		   	  	break  # No more matches found, next_occasion == nil
+		   	  end
+		    end
+		    indexes
+	  end
+
+=begin
+	  def indexes_of(chr, text)
+	  	indexes = []
+	    buffer = text.dup
+
+	    # Note: This is a pretty "old-school" method of traversing
+	    # through string, but imho MUCH cleaner than some
+	    # inject magic with regexes and stuff
+
+	    until buffer.empty? do
+	      next_occasion = text_buffer.index(chr)
+	      buffer.slice!(0, next_occasion)
+	      indexes.push( next_occasion)
+	    end
+	    indexes
+	  end
+=end
+
+=begin
 	    index_list = [[]]
 	    character_finder = Regexp.new(chr)
 	    (index_list + text.split(character_finder)[0..-2]).inject do |indexes, str|
 	      indexes.empty? ? [str.length] : (indexes + [indexes.last+str.length+1])
 	    end
 	  end
-
+=end
     end
   end
 end
