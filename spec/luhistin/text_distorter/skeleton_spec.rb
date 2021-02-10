@@ -52,7 +52,6 @@ describe Luhistin::TextDistorter::Skeleton do
   	#
 
   	subject.curve = [0.314, 0.109, 0.92, 0.78, 0.559]
-  	#propability = subject.propability_from_curve
 
   	prop_zero = subject.propability_from_curve(0)
   	prop_zero_six = subject.propability_from_curve(0.6)
