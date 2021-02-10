@@ -8,8 +8,8 @@ module Luhistin
 
       # Use this to remove certain characters from text
 	  def remove_chars(chr, text)
-			#locations = text.indexes_of(chr)
-			locations = indexes_of(chr, text)
+			index_finder = Luhistin::TextTool::CharacterIndexFinder.new
+			locations = index_finder.indexes_of(text, chr)
 
 			locations.reverse.each do |space|
 			  rel_position = (space.to_f) / (text.length)
@@ -66,31 +66,6 @@ module Luhistin
 	  def propability_from_curve(x_point)
 	    @curve[(@curve.length-1)*x_point]
       end
-
-	  def indexes_of(chr, text)
-	  	 	# Border case - to prevent infinite loop.
-	  	 	# (Actually this should be exception, since this is an error.)
-	  		return [] if chr.empty?
-
-		  	indexes = []
-		    buffer = text.dup
-
-		    # Note: This is a pretty "old-school" method of traversing
-		    # through string, but imho MUCH cleaner than some
-		    # inject magic with regexes
-
-		    while true do
-		   	  if (next_occasion = buffer.index(chr))
-		   	  	buffer.slice!(0, next_occasion+1)
-
-		   	  	next_occasion += (indexes.last+1) unless indexes.empty?
-		   	  	indexes.push(next_occasion)
-		   	  else
-		   	  	break  # No more matches found, next_occasion == nil
-		   	  end
-		    end
-		    indexes
-	  end
 
     end
   end
