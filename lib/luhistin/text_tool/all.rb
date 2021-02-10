@@ -1,0 +1,1 @@
+require_relative 'character_index_finder'
