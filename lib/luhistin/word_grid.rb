@@ -12,7 +12,6 @@ module Luhistin
   		# Technically, it's not precisely a "grid", but this word
   		# is snappier than "array of lines and words".
   		#
-        #str.split("\n").map(&:separate_words)
         str.split("\n").map do |line|
         	separate_words(line)
         end
