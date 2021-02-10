@@ -12,10 +12,13 @@ module Luhistin
   		# Technically, it's not precisely a "grid", but this word
   		# is snappier than "array of lines and words".
   		#
-        str.split("\n").map(&:separate_words)
+        #str.split("\n").map(&:separate_words)
+        str.split("\n").map do |line|
+        	separate_words(line)
+        end
   	end
 
-    def separate_words
+    def separate_words(line)
 	  	# The following expression finds parts of a text which can be
 	  	# considered "word boundaries". Most often they are spaces,
 	  	# but the expression handles a bit dirtier input data, looking for
@@ -27,7 +30,7 @@ module Luhistin
 	  	# tolerable expression to separate words.
 
 	    cut_expression = /[^a-zA-ZåäöÅÄÖ#_\@:]{1,5}/
-	    split(cut_expression)
+	    line.split(cut_expression)
 	end
   end
 end

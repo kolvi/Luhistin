@@ -1,5 +1,5 @@
 class String
-
+=begin
   # Converts multi-line string to array of lines, which consists
   # array of words (in other words, two-dimensional array of words).
   # This structure allows things like switching places of words, giving
@@ -28,7 +28,7 @@ class String
     split(cut_expression)
   end
 
-
+=end
   def random_cut_point
     rand(1..(length-1))
   end
