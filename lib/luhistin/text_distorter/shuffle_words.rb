@@ -5,21 +5,23 @@ module Luhistin
       def distort(text, curve)
 	      @curve = curve
 
-		  word_objects = text.wordlines.indexify
-		  linear_shuffle(word_objects)
+		  #word_chain = text.wordlines.indexify
+		  word_chain = Luhistin::WordChain.new(text)
+		  linear_shuffle(word_chain.word_hash_list)
 
-		  word_objects.deindexify.revert_wordlines
+		  #word_chain.deindexify.revert_wordlines
+		  word_chain.revert_to_string
       end
 
       private
 
-      def linear_shuffle(word_objects)
-		(0..word_objects.length).each do |ind|
+      def linear_shuffle(word_chain)
+		(0..word_chain.length).each do |ind|
 
-		    relative_position = (ind.to_f)/(word_objects.length)
+		    relative_position = (ind.to_f)/(word_chain.length)
 
 		    if randomly_selected?( relative_position )
-		      shuffle_further(word_objects, ind)
+		      shuffle_further(word_chain, ind)
 		    end
 		end
   	  end
