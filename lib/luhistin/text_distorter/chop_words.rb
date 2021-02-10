@@ -7,7 +7,6 @@ module Luhistin
 
       	modify_some_words(text) do |word|
       	  insert_random_space(word)
-          #word.insert_random_space
       	end
       end
 
