@@ -10,12 +10,12 @@ describe Luhistin::TextDistorter::Skeleton do
 
   it "sometimes passes random filter test for modifying text" do
   	set_mocks 0.4
-    expect(subject.randomly_selected? :i_pass_whatevs).to be true
+    expect(subject.randomly_selected? :whatever).to be true
   end
 
   it "sometimes fails random filter test for modifying text" do
   	set_mocks 0.7
-    expect(subject.randomly_selected? :i_pass_whatevs).to be false
+    expect(subject.randomly_selected? :whatever).to be false
   end
 
   it "has no curve for starters" do
@@ -25,7 +25,7 @@ describe Luhistin::TextDistorter::Skeleton do
   it "correctly creates the curve when distort called" do
 	expect(Luhistin::PropabilityCurve).to receive(:new).and_return(:the_new_curve) # use "allow" for permanent mock
 
-  	subject.distort(:text_to_distort, :curve_y_values)
+  	subject.distort(:whatever_text, :whatever_y_values)
   	expect(subject.curve).to eq(:the_new_curve)
   end
 
