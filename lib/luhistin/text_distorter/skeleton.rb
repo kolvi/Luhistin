@@ -9,7 +9,6 @@ module Luhistin
 
       def distort(text, curve)
       	@curve = Luhistin::PropabilityCurve.new(curve)
-        #@curve = curve
       end
 
       # Use this to remove certain characters from text
@@ -46,7 +45,6 @@ module Luhistin
       # This can be used to "sprinkle" characters here and there
       # to create snazzy-looking text art
       def sprinke_chars(text, char_list)
-        #chunk_length = text.length / @curve.length
         chunk_length = text.length / @curve.curve_y_values.length
         chunks = text.chars.each_slice(chunk_length).map(&:join)
 
@@ -66,21 +64,9 @@ module Luhistin
       end
 
       def randomly_selected?(relative_position)
-        #Random.rand < propability_from_curve(relative_position)
         Random.rand < @curve.propability_from_curve(relative_position)
       end
-=begin
-      def propability_from_curve(x_point)
-        if (x_point == 1)
-          # Border case: for number one, return last index
-          # since using formula would return too large a value
-          the_index = @curve.length - 1
-        else
-          the_index = @curve.length * x_point
-        end
-        @curve[the_index]
-      end
-=end
+
     end
   end
 end
