@@ -18,10 +18,12 @@ describe Luhistin::TextDistorter::Skeleton do
   	result_a = subject.propability_from_curve(0)
   	result_b = subject.propability_from_curve(0.5)
   	result_c = subject.propability_from_curve(1)
+  	result_d = subject.propability_from_curve(0.298)
 
   	expect(result_a).to eq(0.2)
   	expect(result_b).to eq(1)
   	expect(result_c).to eq(1)
+  	expect(result_d).to eq(0.2)
   end
 
   it "finds right propabilities from five-stage curve" do
