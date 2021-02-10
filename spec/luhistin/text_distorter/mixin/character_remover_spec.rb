@@ -38,27 +38,17 @@ describe Luhistin::TextDistorter::SpecClassCharacterRemover do
     expect(result).to eq("First line\nSecond lineThird line")
   end
 
-=begin
-  it "sometimes passes random filter test for modifying text" do
-  	set_mocks 0.4
-    expect(subject.randomly_selected? :whatever).to be true
+  it 'does not remove anything if there are no matches' do
+    result = subject.remove_chars("x", "Sometimes there really are\nno matches")
+    expect(result).to eq("Sometimes there really are\nno matches")
   end
 
-  it "sometimes fails random filter test for modifying text" do
-  	set_mocks 0.7
-    expect(subject.randomly_selected? :whatever).to be false
+  it 'graciously handles empty string as text' do
+    result = subject.remove_chars("p", "")
+    expect(result).to eq("")
   end
 
-  it "has no curve for starters" do
-  	expect(subject.curve).to eq(nil)
-  end
+  #TODO: It throws error if first parameter (character) is not valid
 
-  it "correctly creates the curve when distort called" do
-	expect(Luhistin::PropabilityCurve).to receive(:new).and_return(:curve_instance) # use "allow" for permanent mock
-
-  	subject.distort(:whatever_text, :whatever_y_values)
-  	expect(subject.curve).to eq(:curve_instance)
-  end
-=end
 end
 
