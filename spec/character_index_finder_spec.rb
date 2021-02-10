@@ -19,6 +19,10 @@ describe Luhistin::TextTool::CharacterIndexFinder do
     expect(subject.indexes_of("There are no matches here\nfor the certain character", "x")).to eq([])
   end
 
+  it "handles empty text graciously, returning no matches" do
+    expect(subject.indexes_of("", "x")).to eq([])
+  end
+
 
   # Error cases
 
