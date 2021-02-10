@@ -1,6 +1,7 @@
 module Luhistin
   module TextDistorter
     class Skeleton
+      attr_accessor :curve
 
       def initialize
       	@curve = nil
@@ -64,7 +65,14 @@ module Luhistin
       end
 
 	  def propability_from_curve(x_point)
-	    @curve[(@curve.length-1)*x_point]
+	  	if (x_point == 1)
+	  		# Border case: for number one, return last index
+	  		# since using formula would return too large a value
+	  		the_index = @curve.length-1
+	  	else
+	  		the_index = @curve.length*x_point
+	  	end
+	  	@curve[the_index]
       end
 
     end
