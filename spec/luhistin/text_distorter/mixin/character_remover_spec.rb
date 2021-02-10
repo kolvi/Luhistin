@@ -10,13 +10,6 @@ end
 
 describe Luhistin::TextDistorter::SpecClassCharacterRemover do
 
-  def set_mocks(canned_rand)
-  	#curveclass = Luhistin::PropabilityCurve
-	  subject.curve = curveclass.new([0.2, 0.4, 0.6])
-	  expect_any_instance_of(curveclass).to receive(:propability_reading).and_return(0.55)
-	  expect(Random).to receive(:rand).and_return(canned_rand) # use "allow" for permanent mock
-  end
-
   before(:each) do
     # Note: We could mock PropabilityCurve, but the result is
     # deterministic and really quite simple, so we decide not to
