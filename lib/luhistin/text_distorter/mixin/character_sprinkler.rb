@@ -5,22 +5,18 @@ module Luhistin
       # This can be used to "sprinkle" characters here and there
       # to create snazzy-looking text art
       def sprinke_chars(text, char_list)
-        chunk_length = text.length / @curve.curve_y_values.length
-        chunks = text.chars.each_slice(chunk_length).map(&:join)
 
-        chunks.map.with_index do |chunk, ind|
-          # There is most likely one chunk more than there are
-          # indexes at "curves", since split is not even
+      	new_text = text.dup
+      	last_character = new_text.length-1
 
-          rel_position = ind.to_f / chunks.length
-
-          (0..chunk.length - 1).to_a.reverse.each do |c_ind|
+      	last_character.downto(0).each do |ind|
+      		rel_position = ind.to_f / last_character
             if randomly_selected? (rel_position)
-              chunk.insert(c_ind, "#{char_list.sample}")
+              new_text.insert(ind, char_list.sample)
             end
-          end
-          chunk
-        end.join
+      	end
+      	new_text
+
       end
       
   	end
