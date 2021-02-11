@@ -10,6 +10,9 @@ end
 
 describe Luhistin::TextDistorter::SpecClassCharacterRemover do
 
+  # Todo: Should we mock Luhistin::TextTool::CharacterIndexFinder,
+  # because there are separate tests for that class?
+
   before(:each) do
     # Note: We could mock PropabilityCurve, but the result is
     # deterministic and really quite simple, so we decide not to
