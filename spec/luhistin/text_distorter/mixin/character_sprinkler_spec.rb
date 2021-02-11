@@ -28,11 +28,11 @@ describe Luhistin::TextDistorter::SpecClassCharacterSprinkler do
     allow(characters).to receive(:sample).and_return(*samples)
 
     expected_result = "y-z-x-y-z-x------y--z--x-------y-z-x-y-z-------x--y--z-"
-    expect(subject.sprinke_chars(text, characters)).to eq(expected_result)
+    expect(subject.sprinkle_chars(text, characters)).to eq(expected_result)
   end
 
   it 'works with empty string, returning empty string' do
-    expect(subject.sprinke_chars("", 'xyz'.chars)).to eq("")
+    expect(subject.sprinkle_chars("", 'xyz'.chars)).to eq("")
   end
 
   it 'works with a string with length one' do
@@ -41,7 +41,7 @@ describe Luhistin::TextDistorter::SpecClassCharacterSprinkler do
     allow(Random).to receive(:rand).and_return(0.5)
     allow(characters).to receive(:sample).and_return('defg')
 
-    expect(subject.sprinke_chars("-", characters)).to eq("defg-")
+    expect(subject.sprinkle_chars("-", characters)).to eq("defg-")
   end
 
   # TODO: Method should throw error, if characters == empty array

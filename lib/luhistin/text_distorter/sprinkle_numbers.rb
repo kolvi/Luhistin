@@ -6,7 +6,7 @@ module Luhistin
       def distort(text, curve)
         super
 
-        sprinke_chars(text, "0123456789".chars)
+        sprinkle_chars(text, "0123456789".chars)
       end
     end
   end
