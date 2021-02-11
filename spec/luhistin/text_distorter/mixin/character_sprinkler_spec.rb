@@ -44,5 +44,8 @@ describe Luhistin::TextDistorter::SpecClassCharacterSprinkler do
     expect(subject.sprinke_chars("-", characters)).to eq("defg-")
   end
 
+  # TODO: Method should throw error, if characters == empty array
+  # TODO: Some other input validation also?
+
 end
 
