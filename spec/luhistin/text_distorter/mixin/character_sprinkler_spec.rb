@@ -36,12 +36,12 @@ describe Luhistin::TextDistorter::SpecClassCharacterSprinkler do
   end
 
   it 'works with a string with length one' do
-    characters = 'xyz'.chars
+    characters = ['abc', 'defg', 'hijkl']
 
     allow(Random).to receive(:rand).and_return(0.5)
-    allow(characters).to receive(:sample).and_return('z')
+    allow(characters).to receive(:sample).and_return('defg')
 
-    expect(subject.sprinke_chars("-", characters)).to eq("z-")
+    expect(subject.sprinke_chars("-", characters)).to eq("defg-")
   end
 
 end
