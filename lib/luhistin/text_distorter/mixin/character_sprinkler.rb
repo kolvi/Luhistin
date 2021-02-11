@@ -11,7 +11,13 @@ module Luhistin
       	last_character = new_text.length-1
 
       	last_character.downto(0).each do |ind|
-      		rel_position = ind.to_f / last_character
+      		if (text.length == 1)
+      			rel_position = 0
+      		else
+      			# This would be division by zero, if text.length == 1
+      			rel_position = ind.to_f / last_character
+      		end
+
             if randomly_selected? (rel_position)
               new_text.insert(ind, char_list.sample)
             end
