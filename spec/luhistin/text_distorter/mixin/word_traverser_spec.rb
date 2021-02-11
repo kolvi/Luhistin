@@ -8,6 +8,8 @@ module Luhistin
   end
 end
 
+# Todo: should we mock Luhistin::LineWordList here?
+
 describe Luhistin::TextDistorter::SpecClassWordTraverser do
 
   before(:each) do
