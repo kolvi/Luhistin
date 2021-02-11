@@ -12,7 +12,7 @@ module Luhistin
           # There is most likely one chunk more than there are
           # indexes at "curves", since split is not even
 
-          rel_position = ind / chunks.length
+          rel_position = ind.to_f / chunks.length
 
           (0..chunk.length - 1).to_a.reverse.each do |c_ind|
             if randomly_selected? (rel_position)
