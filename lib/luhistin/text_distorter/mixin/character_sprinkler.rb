@@ -5,6 +5,7 @@ module Luhistin
       # This can be used to "sprinkle" characters here and there
       # to create snazzy-looking text art
       def sprinke_chars(text, char_list)
+      	return "" if text == ""
 
       	new_text = text.dup
       	last_character = new_text.length-1

@@ -31,5 +31,9 @@ describe Luhistin::TextDistorter::SpecClassCharacterSprinkler do
     expect(subject.sprinke_chars(text, characters)).to eq(expected_result)
   end
 
+  it 'works with empty string, returning empty string' do
+    expect(subject.sprinke_chars("", 'xyz'.chars)).to eq("")
+  end
+
 end
 
