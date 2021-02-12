@@ -35,9 +35,10 @@ module Luhistin
         # crappy input data, such as tweets, so we need this kind of
         # tolerable expression to separate words.
 
-        # NOTE: Many non-alphanumeric characters, such as commas,
+        # NOTE: Almost all non-letter characters, such as commas,
         # explanation marks and others are entirely cut away from words
-        # and not returned!
+        # and not returned! "_", "#", ":" and "@" and exceptions,
+        # so the program can handle copy-pasted tweets a bit better.
         #
         # This is okay, because the purpose of Luhistin is to create
         # messy word art and the result should act as an inspiration for
