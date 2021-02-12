@@ -36,4 +36,10 @@ describe Luhistin::TextTool::WordGridCreator do
     expect(subject.create(the_string)).to eq(expected_result)
   end
 
+  it 'reads selected few special characters (_@#:) as parts of word' do
+    the_string = "A _word_\nfor: you, @sir #letstalk"
+    expected_result = [["A", "_word_"], ["for:", "you", "@sir", "#letstalk"]]
+    expect(subject.create(the_string)).to eq(expected_result)
+  end
+
 end
