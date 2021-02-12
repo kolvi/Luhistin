@@ -23,5 +23,8 @@ describe Luhistin::TextTool::WordGridTraverser do
 
     expect(result).to eq(expected_result)
   end
+  it "handles an empty list graciously" do
+    expect(subject.traverse([])).to eq([])
+  end
 
 end
