@@ -1,7 +1,7 @@
 module Luhistin
   module TextTool
     class WordGridCreator
-      def create_word_grid(str)
+      def create(str)
         # Converts multi-line string to array of lines, which consists
         # array of words (in other words, two-dimensional array of words).
         # This structure allows things like switching places of words, giving
@@ -17,6 +17,8 @@ module Luhistin
           separate_words(line)
         end
       end
+
+      private
 
       def separate_words(line)
         # The following expression finds parts of a text which can be

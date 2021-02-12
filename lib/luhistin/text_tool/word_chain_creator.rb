@@ -3,8 +3,8 @@ module Luhistin
     class WordChainCreator
 
       def create(str)
-        wg = Luhistin::TextTool::WordGridCreator.new.create_word_grid(str)
-        wg.map do |line|
+        grid = Luhistin::TextTool::WordGridCreator.new.create(str)
+        grid.map do |line|
           line_to_word_hashes(line)
         end.flatten
       end

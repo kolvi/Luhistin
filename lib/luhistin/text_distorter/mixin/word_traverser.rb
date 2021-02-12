@@ -6,8 +6,7 @@ module Luhistin
       # want to modify text word-by-word basis
 
       def modify_some_words(text)
-        #lines = Luhistin::LineWordList.new(text)
-        grid = Luhistin::TextTool::WordGridCreator.new.create_word_grid(text)
+        grid = Luhistin::TextTool::WordGridCreator.new.create(text)
         traverser = Luhistin::TextTool::WordGridTraverser.new
 
         traverser.traverse(grid) do |word, rel_position|
