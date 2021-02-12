@@ -6,9 +6,11 @@ module Luhistin
       # want to modify text word-by-word basis
 
       def modify_some_words(text)
-        lines = Luhistin::LineWordList.new(text)
+        #lines = Luhistin::LineWordList.new(text)
+        grid = Luhistin::TextTool::WordGridCreator.new.create_word_grid(text)
+        traverser = Luhistin::TextTool::WordGridTraverser.new
 
-        lines.traverse do |word, rel_position|
+        traverser.traverse(grid) do |word, rel_position|
           if randomly_selected? (rel_position)
             yield(word)
           else
