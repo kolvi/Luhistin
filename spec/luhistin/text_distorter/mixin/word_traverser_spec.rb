@@ -8,11 +8,10 @@ module Luhistin
   end
 end
 
-# Todo: should we mock Luhistin::LineWordList here?
-
-# Note: Luhistin::LineWordList has more tests on
-# turning all kinds of strings with possible dirty input
-# into simple, clean word grids
+# Note: This is more of a simple integration test,
+# since CurveDistorter, as well as WordGridCreator and
+# WordGridTraverser (used by WordTraverser)
+# have their own unit tests
 
 describe Luhistin::TextDistorter::SpecClassWordTraverser do
 
