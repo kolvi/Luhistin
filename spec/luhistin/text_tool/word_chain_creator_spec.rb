@@ -64,4 +64,9 @@ describe Luhistin::TextTool::WordChainCreator do
     expect(subject.revert_to_string(chain)).to eq(expected_result)
   end
 
+  it 'handles empty chain in revert to string operation' do
+    expect(subject.revert_to_string([])).to eq("")
+  end
+
+
 end
