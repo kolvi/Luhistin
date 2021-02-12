@@ -4,18 +4,19 @@ module Luhistin
 
       # Use this to remove certain characters from text
       def remove_chars(text, chr)
+        new_text = text.dup
         index_finder = Luhistin::TextTool::CharacterIndexFinder.new
-        locations = index_finder.indexes_of(text, chr)
+        locations = index_finder.indexes_of(new_text, chr)
 
         locations.reverse.each do |space|
-          rel_position = (space.to_f) / (text.length)
+          rel_position = (space.to_f) / (new_text.length)
 
           if randomly_selected?(rel_position)
-            text.slice! space
+            new_text.slice! space
           end
         end
 
-        text
+        new_text
       end
 
   	end
