@@ -23,24 +23,24 @@ describe Luhistin::TextDistorter::SpecClassCharacterRemover do
   it 'successfully removes spaces from string' do
     expect(Random).to receive(:rand).and_return(0.5, 0.1, 0.8, 0.6, 0.2)
 
-    result = subject.remove_chars(" ", "hello world, how are you doing?")
+    result = subject.remove_chars("hello world, how are you doing?", " ")
     expect(result).to eq("helloworld, how areyou doing?")
   end
 
   it 'successfully removes newlines from string' do
     expect(Random).to receive(:rand).and_return(0.05, 0.6)
 
-    result = subject.remove_chars("\n", "First line\nSecond line\nThird line")
+    result = subject.remove_chars("First line\nSecond line\nThird line", "\n")
     expect(result).to eq("First line\nSecond lineThird line")
   end
 
   it 'does not remove anything if there are no matches' do
-    result = subject.remove_chars("x", "Sometimes there really are\nno matches")
+    result = subject.remove_chars("Sometimes there really are\nno matches", "x")
     expect(result).to eq("Sometimes there really are\nno matches")
   end
 
   it 'graciously handles empty string as text' do
-    result = subject.remove_chars("p", "")
+    result = subject.remove_chars("", "p")
     expect(result).to eq("")
   end
 

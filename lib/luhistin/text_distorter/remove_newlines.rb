@@ -6,7 +6,7 @@ module Luhistin
       def distort(text, curve)
         super
 
-        remove_chars "\n", text
+        remove_chars text, "\n"
       end
     end
   end
