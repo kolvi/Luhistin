@@ -3,14 +3,20 @@ module Luhistin
     class ShuffleWords < CurveDistorter
       def distort(text, curve)
         super
-
-        word_chain = Luhistin::WordChain.new(text)
-        linear_shuffle(word_chain.word_hash_list)
-
-        word_chain.to_s
+        chain = to_word_chain(text)
+        linear_shuffle(chain)
+        revert_word_chain(chain)
       end
 
       private
+
+      def to_word_chain(text)
+        Luhistin::TextTool::WordChainCreator.new.create_word_chain(text)
+      end
+
+      def revert_word_chain(chain)
+        Luhistin::TextTool::WordChainCreator.new.revert_word_chain_to_string(chain)
+      end
 
       def linear_shuffle(word_chain)
         (0..word_chain.length).each do |ind|
