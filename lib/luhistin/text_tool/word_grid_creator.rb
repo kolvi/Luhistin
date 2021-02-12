@@ -18,6 +18,10 @@ module Luhistin
         end
       end
 
+      def revert_to_string(word_grid)
+        word_grid.map { |line| line.join(" ") }.join("\n")
+      end
+
       private
 
       def separate_words(line)

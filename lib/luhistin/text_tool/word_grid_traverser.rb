@@ -3,15 +3,12 @@ module Luhistin
     class WordGridTraverser
 
       def traverse(grid)
-        result = grid.map.with_index do |line, li|
+        grid.map.with_index do |line, li|
           line.map.with_index do |word, wi|
             rel_position = relative_position_of_word(li, wi, grid)
             yield(word, rel_position)
           end
         end
-
-        # Convert result straight away to string
-        revert_to_string(result)
       end
 
       private
@@ -30,10 +27,6 @@ module Luhistin
 
         # Return "relative position" of word = float between 0 and 1)
         flattened_index.to_f / grid.flatten.length
-      end
-
-      def revert_to_string(wordlines)
-        wordlines.map { |words_in_line| words_in_line.join(" ") }.join("\n")
       end
 
       def no_of_nested_items(last_index_counted, grid)
