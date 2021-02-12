@@ -35,6 +35,16 @@ module Luhistin
         # crappy input data, such as tweets, so we need this kind of
         # tolerable expression to separate words.
 
+        # NOTE: Many non-alphanumeric characters, such as commas,
+        # explanation marks and others are entirely cut away from words
+        # and not returned!
+        #
+        # This is okay, because the purpose of Luhistin is to create
+        # messy word art and the result should act as an inspiration for
+        # the writer / artist. She/he/they can add those characters
+        # back later on.
+        #
+
         cut_expression = /[^a-zA-ZåäöÅÄÖ#_\@:]{1,5}/
         line.split(cut_expression)
       end
