@@ -48,4 +48,20 @@ describe Luhistin::TextTool::WordChainCreator do
     expect(subject.create(:the_string)).to eq([])
   end
 
+  it 'converts a chain back to string' do
+    chain = [
+      {:word=>"A", :endline_after=>false},
+      {:word=>"word", :endline_after=>true},
+      {:word=>"", :endline_after=>true},
+      {:word=>"for", :endline_after=>false},
+      {:word=>"you,", :endline_after=>false},
+      {:word=>"sir", :endline_after=>true}
+    ]
+
+    # Note: Last newline or space character is removed,
+    # even though "sir" ends with newline in chain
+    expected_result = "A word\n\nfor you, sir"
+    expect(subject.revert_to_string(chain)).to eq(expected_result)
+  end
+
 end

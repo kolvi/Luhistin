@@ -14,7 +14,7 @@ module Luhistin
           word = word_hash[:word]
           separator = word_hash[:endline_after] ? "\n" : " "
           result + word + separator
-        end
+        end.rstrip
       end
 
       private
