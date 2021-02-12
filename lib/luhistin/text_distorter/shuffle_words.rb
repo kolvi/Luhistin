@@ -11,11 +11,11 @@ module Luhistin
       private
 
       def to_word_chain(text)
-        Luhistin::TextTool::WordChainCreator.new.create_word_chain(text)
+        Luhistin::TextTool::WordChainCreator.new.create(text)
       end
 
       def revert_word_chain(chain)
-        Luhistin::TextTool::WordChainCreator.new.revert_word_chain_to_string(chain)
+        Luhistin::TextTool::WordChainCreator.new.revert_to_string(chain)
       end
 
       def linear_shuffle(word_chain)

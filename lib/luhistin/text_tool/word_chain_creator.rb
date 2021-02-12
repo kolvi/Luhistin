@@ -2,14 +2,14 @@ module Luhistin
   module TextTool
     class WordChainCreator
 
-      def create_word_chain(str)
+      def create(str)
         wg = Luhistin::TextTool::WordGridCreator.new.create_word_grid(str)
         wg.map do |line|
           line_to_word_hashes(line)
         end.flatten
       end
 
-      def revert_word_chain_to_string(word_chain)
+      def revert_to_string(word_chain)
         word_chain.inject("") do |result, word_hash|
           word = word_hash[:word]
           separator = word_hash[:endline_after] ? "\n" : " "
