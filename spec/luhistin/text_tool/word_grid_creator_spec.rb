@@ -1,4 +1,5 @@
 require 'luhistin'
+require 'pry'
 
 describe Luhistin::TextTool::WordGridCreator do
 
@@ -40,6 +41,17 @@ describe Luhistin::TextTool::WordGridCreator do
     the_string = "A _word_\nfor: you, @sir #letstalk"
     expected_result = [["A", "_word_"], ["for:", "you", "@sir", "#letstalk"]]
     expect(subject.create(the_string)).to eq(expected_result)
+  end
+
+  it 'converts a grid back to string' do
+    grid = [["a", "b:", "c"],[],["d", "e"]]
+    expected_result = "a b: c\n\nd e"
+    expect(subject.revert_to_string(grid)).to eq(expected_result)
+  end
+
+  it 'converts an empty grid back to string' do
+    grid = []
+    expect(subject.revert_to_string(grid)).to eq("")
   end
 
 end
