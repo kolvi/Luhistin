@@ -24,9 +24,15 @@ describe Luhistin::TextTool::WordGridCreator do
     expect(subject.create("")).to eq([])
   end
 
-  it "handles empty rows in the string as it should" do
+  it "handles empty rows in the string" do
     the_string = "A word\n\nfor you, sir"
     expected_result = [["A", "word"], [], ["for", "you", "sir"]]
+    expect(subject.create(the_string)).to eq(expected_result)
+  end
+
+  it "treats consequtive spaces as a single boundary, up to five spaces" do
+    the_string = "A word\nfor  you,    sir"
+    expected_result = [["A", "word"], ["for", "you", "sir"]]
     expect(subject.create(the_string)).to eq(expected_result)
   end
 
