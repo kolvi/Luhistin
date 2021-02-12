@@ -24,7 +24,7 @@ describe Luhistin::TextTool::WordChainCreator do
     expect(subject.create(:the_string)).to eq(expected_result)
   end
 
-  it "handles empty lines within a string" do
+  it "handles empty lines within a word grid" do
     grid = [
       ["A", "word"],
       [],
@@ -42,5 +42,10 @@ describe Luhistin::TextTool::WordChainCreator do
     expect(subject.create(:the_string)).to eq(expected_result)
   end
 
+  it "handles an empty word grid graciously" do
+    grid = []
+    allow_any_instance_of(Luhistin::TextTool::WordGridCreator).to receive(:create).with(:the_string).and_return(grid)
+    expect(subject.create(:the_string)).to eq([])
+  end
 
 end
