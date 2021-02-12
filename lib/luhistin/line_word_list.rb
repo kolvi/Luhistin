@@ -1,9 +1,8 @@
 module Luhistin
   class LineWordList
-    include WordGrid
 
     def initialize(str)
-      @word_grid = create_word_grid(str)
+      @word_grid = Luhistin::TextTool::WordGridCreator.new.create_word_grid(str)
     end
 
     #
