@@ -1,11 +1,11 @@
 module Luhistin
   class WordChain
-    include WordGrid
 
     attr_reader :word_hash_list
 
     def initialize(str)
-      @word_hash_list = create_word_grid(str).map do |line|
+      griddie = Luhistin::TextTool::WordGridCreator.new.create_word_grid(str)
+      @word_hash_list = griddie.map do |line|
         wordlist_to_word_hashes(line)
       end.flatten
     end
