@@ -23,9 +23,10 @@ module Luhistin
 		raise ArgumentError, "multiplier must be float or integer" unless (mclass == Integer || mclass == Float)
 		raise ArgumentError, "multiplier cannot be negative" unless (multiplier >= 0)
 
-		@curve_y_values.map do |y|
+		new_values = curve_y_values.map do |y|
 			[y*multiplier, 1].min
 		end
+		Luhistin::PropabilityCurve.new(new_values)
 	end
 
   end

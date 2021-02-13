@@ -66,4 +66,13 @@ describe Luhistin::PropabilityCurve do
     expect(prop_zero_threeplus).to eq(0.109)
     expect(prop_zero_sevenplus).to eq(0.78)
   end
+
+  it "multiplies the curve correctly with * operator" do
+    subject.curve_y_values = [0.2, 0.4, 0.6]
+    new_curve = subject*0.5
+    expect(new_curve).to be_an_instance_of(Luhistin::PropabilityCurve)
+    expect(new_curve.propability_reading(0)).to eq(0.1)
+    expect(new_curve.propability_reading(0.34)).to eq(0.2)
+    expect(new_curve.propability_reading(0.68)).to eq(0.3)
+  end
 end
