@@ -75,4 +75,17 @@ describe Luhistin::PropabilityCurve do
     expect(new_curve.propability_reading(0.34)).to eq(0.2)
     expect(new_curve.propability_reading(0.68)).to eq(0.3)
   end
+
+  it "raises error if multiplier is not a number" do
+    expect do
+      subject*(:foobar)
+    end.to raise_error(ArgumentError, "multiplier must be float or integer")
+  end
+
+  it "raises error if multiplier is negative" do
+    expect do
+      subject*(-0.8)
+    end.to raise_error(ArgumentError, "multiplier cannot be negative")
+  end
+
 end
