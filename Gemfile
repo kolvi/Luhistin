@@ -7,7 +7,6 @@ source 'https://rubygems.org'
 # end
 
 gem 'pry'
-gem 'rake'
 gem 'rubocop', '~> 1.9', require: false
 
 group :development, :test do
