@@ -1,0 +1,28 @@
+{
+  "name": "luhistin",
+  "version": "1.0.0",
+  "description": "Experimental tool for creating text art",
+  "private": true,
+  "directories": {
+    "lib": "jslib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kolvi/Luhistin.git"
+  },
+  "author": "Olavi Koistinen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kolvi/Luhistin/issues"
+  },
+  "homepage": "https://github.com/kolvi/Luhistin#readme",
+  "dependencies": {
+    "lodash": "^4.17.20",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
