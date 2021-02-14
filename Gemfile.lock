@@ -47,7 +47,7 @@ PLATFORMS
 
 DEPENDENCIES
   pry
-  rake
+  rake (~> 13.0)
   rspec
   rubocop (~> 1.9)
 
