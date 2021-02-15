@@ -3,8 +3,9 @@
 require 'dotenv'
 require 'sinatra/base'
 require 'sequel'
-
+require_relative 'lib/luhistin.rb'
 require_relative 'lib/server.rb'
+require_relative 'db/model/all.rb'
 
 class LuhistinServer < Sinatra::Base
   set :public_folder, __dir__ + '/client/dist'
@@ -16,5 +17,3 @@ class LuhistinServer < Sinatra::Base
   run!
 end
 
-require_relative 'db/model/all.rb'
-require_relative 'lib/luhistin.rb'
