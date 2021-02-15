@@ -1,5 +1,9 @@
 require 'rake'
 require 'rspec/core/rake_task'
+require 'pry'
+require 'dotenv'
+
+Dotenv.load
 
 # From:
 # https://medium.com/@mglover/automated-tests-ruby-rspec-rake-and-travis-3312b50109a5
