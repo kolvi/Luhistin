@@ -8,6 +8,8 @@ source 'https://rubygems.org'
 
 gem 'pry'
 gem 'rubocop', '~> 1.9', require: false
+gem 'thin'
+gem 'sinatra'
 
 group :development, :test do
   gem 'rspec'
