@@ -3,6 +3,9 @@ import Vuetify from 'vuetify'
 import example from './Example.vue'
 import LuhistinApp from './App.vue'
 
+import './css/vendor/roboto-font.css'
+import './css/vendor/vuetify.min.css'
+
 //import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify)
 Vue.component('example', example)
