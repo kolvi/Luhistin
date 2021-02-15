@@ -1,21 +1,28 @@
-require 'pry'
-require 'dotenv'
-Dotenv.load
+#require 'pry'
 
-require 'sinatra'
+require 'dotenv'
+require 'sinatra/base'
 require 'sequel'
 
-#DB = Sequel.connect(adapter: :postgres, user: ENV['DB_USER'], password: ENV['DB_PASSWORD'], database: 'luhistin')
+require_relative 'lib/server.rb'
 
-DB = Sequel.connect(adapter: :postgres,
-  	user: ENV['DB_USER'],
-  	password: ENV['DB_PASSWORD'],
-  	database: 'luhistin')
+class LuhistinServer < Sinatra::Base
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  puts "Here I am!!!"
+  set :public_folder, __dir__ + '/client/dist'
+  #set :public_folder, '/.client/dist'
+  set :root, __dir__ + '/'
+  #set :root, File.dirname(__FILE__)
+  #set :root, __dir__ + '.'
 
-Sequel::Model.db = DB
+  run!
+end
 
 require_relative 'db/model/all.rb'
 require_relative 'lib/luhistin.rb'
-require_relative 'lib/server.rb'
-
-binding.pry
