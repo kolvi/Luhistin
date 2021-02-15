@@ -2,18 +2,8 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import example from './Example.vue'
 
-/*
-function component() {
-  const element = document.createElement('div');
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
-}
-document.body.appendChild(component());
-*/
 //import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify)
-//Vue.component('example', require('./Example.Vue'))
 Vue.component('example', example)
 
 // Solve "Using runtime only etc" error:
