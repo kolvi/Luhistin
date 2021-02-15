@@ -14,6 +14,6 @@ export default {
 
 <style>
 .example {
-  color: purple;
+  color: orange;
 }
 </style>

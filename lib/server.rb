@@ -1,5 +1,6 @@
-#require 'sinatra'
+set :public_folder, __dir__ + '/../client/dist'
 
+require 'pry'
 get '/' do
-  'Hello world!'
+	erb :index
 end
