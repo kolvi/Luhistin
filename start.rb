@@ -10,6 +10,7 @@ require_relative 'db/model/all.rb'
 class LuhistinServer < Sinatra::Base
   set :public_folder, __dir__ + '/client/dist'
   set :root, __dir__
+  set :logging, true
 
   run!
 end
