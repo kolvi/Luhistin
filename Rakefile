@@ -11,4 +11,12 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = "--format documentation"
 end
 
-task default: :spec
+task :default do
+	puts "=== BUILDING WITH WEBPACK ==="
+	sh "npm run build"
+	puts "=== STARTING SINATRA SERVER ==="
+	sh "bundle exec ruby start.rb"
+end
+
+
+#task default: :spec
