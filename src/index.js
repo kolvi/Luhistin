@@ -24,7 +24,7 @@ window.onload = function() {
 	  el: '#app',
 	  vuetify : new Vuetify(),
 	  data: {
-	    message: 'Helllllo Vue!'
+	    message: 'Helllllo!'
 	  }
 	})
 }
