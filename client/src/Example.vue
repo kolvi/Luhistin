@@ -6,7 +6,7 @@
 export default {
   data () {
     return {
-      msg: 'Hello world! Rautaa rajalle'
+      msg: 'Hello world! Rautaa rajalle ny!'
     }
   }
 }
