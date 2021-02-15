@@ -31,8 +31,17 @@ class LuhistinServer < Sinatra::Base
     stext.values.to_json
   end
 
+  def success_with_all(model_class)
+    status 200
+    model_class.all.map(&:values).to_json
+  end
+
   get '/sourcetext/:id' do
     success_with sourcetext_by_id 
+  end
+
+  get '/sourcetexts' do
+    success_with_all(Sourcetext)
   end
 
   post '/sourcetext' do
@@ -44,7 +53,6 @@ class LuhistinServer < Sinatra::Base
     end
     success_with stext
   end
-
 
   patch '/sourcetext/:id' do
     begin
