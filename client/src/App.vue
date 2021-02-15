@@ -1,16 +1,10 @@
 <template>
 	<v-app>
-<!--
-	  TODO: Remove?
-	  <v-navigation-drawer app>
-	  </v-navigation-drawer>
--->
 	  <v-app-bar app>
 	      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 	      <v-toolbar-title>Luhistin</v-toolbar-title>
 	  </v-app-bar>
 
-	  <!-- Sizes your content based upon application components -->
 	  <v-main>
 
 	    <!-- Provides the application the proper gutter -->
@@ -34,17 +28,8 @@
 	 	        	Old processings here!
 	 	        </v-tab-item>
 			</v-tabs>
-<!--
-          <example></example>
--->
-
 	    </v-container>
 	  </v-main>
-
-	  <v-footer app>
-	  	Something in the fotter
-	    <!-- -->
-	  </v-footer>
 
 	</v-app>
 

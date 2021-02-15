@@ -12,6 +12,8 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 task :default do
+	puts "=== INSTALLING MISSING GEMS IF ANY ==="
+	sh "bundle install"
 	puts "=== BUILDING WITH WEBPACK ==="
 	sh "npm run build"
 	puts "=== STARTING SINATRA SERVER ==="

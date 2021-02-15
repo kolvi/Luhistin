@@ -10,6 +10,7 @@ gem 'pry'
 gem 'rubocop', '~> 1.9', require: false
 gem 'thin'
 gem 'sinatra'
+gem 'dotenv'
 
 group :development, :test do
   gem 'rspec'
