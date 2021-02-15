@@ -7,14 +7,6 @@ require 'sequel'
 require_relative 'lib/server.rb'
 
 class LuhistinServer < Sinatra::Base
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
-  puts "Here I am!!!"
   set :public_folder, __dir__ + '/client/dist'
   #set :public_folder, '/.client/dist'
   set :root, __dir__ + '/'
