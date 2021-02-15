@@ -10,56 +10,51 @@ class LuhistinServer < Sinatra::Base
     end
   end
 
+  def read_columns_of(model_class)
+    pars = read_bodypars
+
+    # Ensure that:
+    # 1. all parameters are actually columns of the class
+    # 2. "id" is not one of them!
+
+    available_keys = model_class.columns-[:id]
+    halt 400 unless (pars.keys - available_keys).empty?
+    pars
+  end
+
   def sourcetext_by_id
     Sourcetext[params[:id]] || (halt 404)
   end
 
-  def ensure_parameters_are_keys_for (model_class, parameter_hash)
-    # Ensude that:
-    # 1. all parameters are actually columns of the class
-    # 2. "id" is not one of them!
-    available_keys = model_class.columns-[:id]
-    halt 400 unless (parameter_hash.keys - available_keys).empty?
-  end
-
-#  def success_with_sourcetext(stext_id)
-#    status 200
-#    Sourcetext[stext_id].values.to_json
-#  end
-
-  def success_with_sourcetext(stext)
+  def success_with(stext)
     status 200
     stext.values.to_json
   end
 
   get '/sourcetext/:id' do
-    success_with_sourcetext( sourcetext_by_id )
+    success_with sourcetext_by_id 
   end
 
   post '/sourcetext' do
-    body_params = read_bodypars
-    ensure_parameters_are_keys_for(Sourcetext, body_params)
+    body_params = read_columns_of(Sourcetext)
     begin
       stext = Sourcetext.create(body_params)
     rescue Sequel::Error
       halt 400
     end
-    success_with_sourcetext stext
+    success_with stext
   end
 
 
   patch '/sourcetext/:id' do
     begin
-       body_params = read_bodypars
-       ensure_parameters_are_keys_for(Sourcetext, body_params)
-
-       # Set all keys
-       (sourcetext_by_id).set_fields(body_params, body_params.keys).save
+       body_params = read_columns_of(Sourcetext)
+       sourcetext_by_id.set_fields(body_params, body_params.keys).save
 
     rescue Sequel::Error
        halt 400
     end
-     success_with_sourcetext( Sourcetext[params[:id]] )
+     success_with( Sourcetext[params[:id]] )
   end
 
   delete '/sourcetext/:id' do
