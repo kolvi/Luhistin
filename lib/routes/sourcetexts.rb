@@ -27,7 +27,7 @@ class LuhistinServer < Sinatra::Base
 #  end
 
   def entity_by_id(model_class)
-#    halt 404 unless params[:id].is_a? Integer
+    halt 400 unless (params[:id].to_i.to_s == params[:id])
     model_class[params[:id]] || (halt 404)
   end
 
