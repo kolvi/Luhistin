@@ -27,6 +27,7 @@ class LuhistinServer < Sinatra::Base
 #  end
 
   def entity_by_id(model_class)
+#    halt 404 unless params[:id].is_a? Integer
     model_class[params[:id]] || (halt 404)
   end
 
@@ -40,24 +41,70 @@ class LuhistinServer < Sinatra::Base
     model_class.all.map(&:values).to_json
   end
 
-  get '/sourcetext/:id' do
-    #success_with sourcetext_by_id 
-    success_with entity_by_id(Sourcetext) 
+  def model_class(routename)
+    Object.const_get(routename.capitalize)
   end
 
-  get '/sourcetexts' do
-    success_with_all(Sourcetext)
+  def process_recipe_params(body_params)
+    distortions = body_params[:distortions].map do |row|
+      DB.row_type(:distortion, [row[:name], row[:intensity].pg_array] )
+    end.pg_array
+    { name: body_params[:name], distortions: distortions }
   end
 
-  post '/sourcetext' do
-    body_params = read_columns_of(Sourcetext)
-    begin
-      entity = Sourcetext.create(body_params)
-    rescue Sequel::Error
-      halt 400
+
+  ["sourcetext", "recipe"].each do |item|
+
+    get "/#{item}" do
+      success_with_all(model_class item)
     end
-    success_with(entity, http_code: 201)
+
+    get "/#{item}/:id" do
+      success_with entity_by_id(model_class item)
+    end
+
+    post "/#{item}" do
+      model = model_class(item)
+      body_params = read_columns_of(model)
+      begin
+        if (item == "recipe")
+          entity = model.create(process_recipe_params body_params)
+        else
+          entity = model.create(body_params)
+        end
+      rescue Sequel::Error
+        halt 400
+      end
+      success_with(entity, http_code: 201)
+    end
+
+    delete "/#{item}/:id" do
+      entity_by_id(model_class item).delete
+      status 204
+    end
+
   end
+
+
+
+#  get '/sourcetext/:id' do
+#    #success_with sourcetext_by_id 
+#    success_with entity_by_id(Sourcetext) 
+#  end
+
+#  get '/sourcetext' do
+#    success_with_all(Sourcetext)
+#  end
+
+#  post '/sourcetext' do
+#    body_params = read_columns_of(Sourcetext)
+#    begin
+#      entity = Sourcetext.create(body_params)
+#    rescue Sequel::Error
+#      halt 400
+#    end
+#    success_with(entity, http_code: 201)
+#  end
 
   patch '/sourcetext/:id' do
     begin
@@ -71,10 +118,10 @@ class LuhistinServer < Sinatra::Base
      success_with( Sourcetext[params[:id]] )
   end
 
-  delete '/sourcetext/:id' do
-    entity_by_id(Sourcetext).delete
-    #sourcetext_by_id.delete
-    status 204
-  end
+#  delete '/sourcetext/:id' do
+#    entity_by_id(Sourcetext).delete
+#    #sourcetext_by_id.delete
+#    status 204
+#  end
 
 end
