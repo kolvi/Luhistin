@@ -41,10 +41,6 @@ class LuhistinServer < Sinatra::Base
     model_class.all.map(&:values).to_json
   end
 
-  def model_class(routename)
-    Object.const_get(routename.capitalize)
-  end
-
   def process_recipe_params(provided)
     processed = {}
     if provided[:name]
@@ -58,19 +54,23 @@ class LuhistinServer < Sinatra::Base
     processed
   end
 
+  def model_for(routename)
+    Object.const_get(routename.capitalize)
+  end
 
   ["sourcetext", "recipe"].each do |item|
+    model = Object.const_get(item.capitalize)
+#    model = model_for(item)
 
     get "/#{item}" do
-      success_with_all(model_class item)
+      success_with_all model
     end
 
     get "/#{item}/:id" do
-      success_with entity_by_id(model_class item)
+      success_with entity_by_id(model)
     end
 
     post "/#{item}" do
-      model = model_class(item)
       body_params = read_columns_of(model)
       begin
         if (item == "recipe")
@@ -85,7 +85,6 @@ class LuhistinServer < Sinatra::Base
     end
 
     patch "/#{item}/:id" do
-      model = model_class(item)
       begin
          body_params = read_columns_of(model)
          keyz = body_params.keys
@@ -99,7 +98,7 @@ class LuhistinServer < Sinatra::Base
     end
 
     delete "/#{item}/:id" do
-      entity_by_id(model_class item).delete
+      entity_by_id(model).delete
       status 204
     end
 

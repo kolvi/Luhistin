@@ -9,6 +9,7 @@ DB = Sequel.connect(adapter: :postgres,
   	password: ENV['DB_PASSWORD'],
   	database: 'luhistin')
 
+Sequel.extension :core_extensions
 DB.extension :pg_array, :pg_row
 DB.register_row_type(:distortion)
 
@@ -16,5 +17,3 @@ Sequel::Model.db = DB
 
 require_relative 'recipe'
 require_relative 'textsource'
-
-#require 'pry'; binding.pry
