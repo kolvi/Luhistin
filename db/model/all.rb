@@ -14,4 +14,4 @@ Sequel::Model.db = DB
 require_relative 'recipe'
 require_relative 'textsource'
 
-#require 'pry'; binding.pry
+require 'pry'; binding.pry
