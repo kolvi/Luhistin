@@ -45,11 +45,17 @@ class LuhistinServer < Sinatra::Base
     Object.const_get(routename.capitalize)
   end
 
-  def process_recipe_params(body_params)
-    distortions = body_params[:distortions].map do |row|
-      DB.row_type(:distortion, [row[:name], row[:intensity].pg_array] )
-    end.pg_array
-    { name: body_params[:name], distortions: distortions }
+  def process_recipe_params(provided)
+    processed = {}
+    if provided[:name]
+      processed[:name] = provided[:name]
+    end
+    if (provided[:distortions])
+      processed[:distortions] = provided[:distortions].map do |row|
+        DB.row_type(:distortion, [row[:name], row[:intensity].pg_array] )
+      end.pg_array
+    end
+    processed
   end
 
 
@@ -76,6 +82,20 @@ class LuhistinServer < Sinatra::Base
         halt 400
       end
       success_with(entity, http_code: 201)
+    end
+
+    patch "/#{item}/:id" do
+      model = model_class(item)
+      begin
+         body_params = read_columns_of(model)
+         keyz = body_params.keys
+         paramz = body_params
+         paramz = process_recipe_params(paramz) if (item == "recipe")
+         entity_by_id(model).set_fields(paramz, keyz).save
+      rescue Sequel::Error
+         halt 400
+      end
+       success_with( model[params[:id]] )
     end
 
     delete "/#{item}/:id" do
@@ -106,17 +126,17 @@ class LuhistinServer < Sinatra::Base
 #    success_with(entity, http_code: 201)
 #  end
 
-  patch '/sourcetext/:id' do
-    begin
-       body_params = read_columns_of(Sourcetext)
-       #sourcetext_by_id.set_fields(body_params, body_params.keys).save
-       entity_by_id(Sourcetext).set_fields(body_params, body_params.keys).save
+#  patch '/sourcetext/:id' do
+#    begin
+#       body_params = read_columns_of(Sourcetext)
+#       #sourcetext_by_id.set_fields(body_params, body_params.keys).save
+ #      entity_by_id(Sourcetext).set_fields(body_params, body_params.keys).save
 
-    rescue Sequel::Error
-       halt 400
-    end
-     success_with( Sourcetext[params[:id]] )
-  end
+#    rescue Sequel::Error
+#       halt 400
+#    end
+ #    success_with( Sourcetext[params[:id]] )
+#  end
 
 #  delete '/sourcetext/:id' do
 #    entity_by_id(Sourcetext).delete
