@@ -26,8 +26,8 @@ class LuhistinServer < Sinatra::Base
     Sourcetext[params[:id]] || (halt 404)
   end
 
-  def success_with(stext)
-    status 200
+  def success_with(stext, http_code: 200)
+    status http_code
     stext.values.to_json
   end
 
@@ -51,7 +51,7 @@ class LuhistinServer < Sinatra::Base
     rescue Sequel::Error
       halt 400
     end
-    success_with stext
+    success_with(stext, http_code: 201)
   end
 
   patch '/sourcetext/:id' do
@@ -67,7 +67,7 @@ class LuhistinServer < Sinatra::Base
 
   delete '/sourcetext/:id' do
     sourcetext_by_id.delete
-    status 200
+    status 204
   end
 
 end

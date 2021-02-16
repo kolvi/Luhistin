@@ -28,6 +28,7 @@ end
 namespace :db do
   require "sequel"
   Sequel.extension :migration
+  Sequel.extension :pg_json_ops
   # DB = Sequel.connect(ENV['DATABASE_URL'])
   DB = Sequel.connect(adapter: :postgres,
   	user: ENV['DB_USER'],
