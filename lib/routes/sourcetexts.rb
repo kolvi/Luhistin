@@ -106,42 +106,4 @@ class LuhistinServer < Sinatra::Base
   end
 
 
-
-#  get '/sourcetext/:id' do
-#    #success_with sourcetext_by_id 
-#    success_with entity_by_id(Sourcetext) 
-#  end
-
-#  get '/sourcetext' do
-#    success_with_all(Sourcetext)
-#  end
-
-#  post '/sourcetext' do
-#    body_params = read_columns_of(Sourcetext)
-#    begin
-#      entity = Sourcetext.create(body_params)
-#    rescue Sequel::Error
-#      halt 400
-#    end
-#    success_with(entity, http_code: 201)
-#  end
-
-#  patch '/sourcetext/:id' do
-#    begin
-#       body_params = read_columns_of(Sourcetext)
-#       #sourcetext_by_id.set_fields(body_params, body_params.keys).save
- #      entity_by_id(Sourcetext).set_fields(body_params, body_params.keys).save
-
-#    rescue Sequel::Error
-#       halt 400
-#    end
- #    success_with( Sourcetext[params[:id]] )
-#  end
-
-#  delete '/sourcetext/:id' do
-#    entity_by_id(Sourcetext).delete
-#    #sourcetext_by_id.delete
-#    status 204
-#  end
-
 end
