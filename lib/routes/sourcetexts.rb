@@ -22,13 +22,17 @@ class LuhistinServer < Sinatra::Base
     pars
   end
 
-  def sourcetext_by_id
-    Sourcetext[params[:id]] || (halt 404)
+#  def sourcetext_by_id
+#    Sourcetext[params[:id]] || (halt 404)
+#  end
+
+  def entity_by_id(model_class)
+    model_class[params[:id]] || (halt 404)
   end
 
-  def success_with(stext, http_code: 200)
+  def success_with(entity, http_code: 200)
     status http_code
-    stext.values.to_json
+    entity.values.to_json
   end
 
   def success_with_all(model_class)
@@ -37,7 +41,8 @@ class LuhistinServer < Sinatra::Base
   end
 
   get '/sourcetext/:id' do
-    success_with sourcetext_by_id 
+    #success_with sourcetext_by_id 
+    success_with entity_by_id(Sourcetext) 
   end
 
   get '/sourcetexts' do
@@ -47,17 +52,18 @@ class LuhistinServer < Sinatra::Base
   post '/sourcetext' do
     body_params = read_columns_of(Sourcetext)
     begin
-      stext = Sourcetext.create(body_params)
+      entity = Sourcetext.create(body_params)
     rescue Sequel::Error
       halt 400
     end
-    success_with(stext, http_code: 201)
+    success_with(entity, http_code: 201)
   end
 
   patch '/sourcetext/:id' do
     begin
        body_params = read_columns_of(Sourcetext)
-       sourcetext_by_id.set_fields(body_params, body_params.keys).save
+       #sourcetext_by_id.set_fields(body_params, body_params.keys).save
+       entity_by_id(Sourcetext).set_fields(body_params, body_params.keys).save
 
     rescue Sequel::Error
        halt 400
@@ -66,7 +72,8 @@ class LuhistinServer < Sinatra::Base
   end
 
   delete '/sourcetext/:id' do
-    sourcetext_by_id.delete
+    entity_by_id(Sourcetext).delete
+    #sourcetext_by_id.delete
     status 204
   end
 
