@@ -4,10 +4,11 @@
       class="mx-auto ma-8"
       max-width="90%">
       <v-card-title>Selected {{thing_name}}</v-card-title>
+<!--
       <v-card-subtitle>Click {{thing_name}} to select it</v-card-subtitle>
+-->
       <v-card-text>
-
-          <v-expansion-panels v-model="panel_status">
+          <v-expansion-panels v-model="panel_status" v-if="thing_list != null">
           <v-expansion-panel>
             <v-expansion-panel-header>
               {{selected_thing_name}}
@@ -24,8 +25,8 @@
 
                 <v-list-item
                 v-for="(thing, t_ind) in thing_list"
-                :key="id"
-                @click="select_thing(t_ind)"
+                :key="thing.id"
+                @click="select_thing(thing.id)"
                 >
                   <v-list-item-content>
                    <v-list-item-title v-text="thing.name"/></v-list-item-content>
@@ -45,8 +46,8 @@
         </v-expansion-panels>
 
         <template v-if="panel_status === undefined">
-          <span style="color: #88f; padding: 0.5em; cursor: pointer" @click="rename_thing">Rename</span>
-          <span style="color: #88f; padding: 0.5em; cursor: pointer" @click="delete_thing">Delete</span>
+          <span class="rename_delete" @click="rename_thing">Rename</span>
+          <span class="rename_delete" @click="delete_thing">Delete</span>
         </template>
 
       </v-card-text>
@@ -71,10 +72,12 @@ module.exports = {
       panel_status: undefined,
       dialog_status: false,
       selected_in_list: undefined,
+//      id: null
     }
   },
   created() {
-    this.update_selection();
+    //this.update_selection();
+    this.initial_selection();
   },
   methods: {
     create_thing() {
@@ -94,6 +97,13 @@ module.exports = {
     update_selection() {
       if (this.selected_in_list !== this.selection)
         this.selected_in_list = this.selection;
+    },
+    initial_selection() {
+      // TODO: Let pick initial selection
+      if (this.thing_list.length > 0) {
+        this.selected_in_list = 0;
+        this.$emit("select", this.thing_list[0].id)
+      }
     }
   },
   computed: {
@@ -107,15 +117,15 @@ module.exports = {
     }
   },
   watch: {
-    selection(value) {
+/*    selection(value) {
       console.log("sel = " + this.selection);
       this.update_selection();
-    },
+    },*/
     selected_in_list(value) {
       console.log("sil = " + this.selected_in_list);
     },
-    thing_list(){
-      console.log("moi")
+    thing_list: function(newVal, oldVal){
+      console.log("thing list updated")
     }
   },
   
@@ -130,4 +140,7 @@ module.exports = {
 
 
 <style lang="css">
+  .rename_delete {
+    color: #88f; padding: 0.5em; cursor: pointer;
+  }
 </style>

@@ -18,16 +18,14 @@
 
 						<thing-selector v-if="sourcetexts != null"
 							:thing_list="sourcetexts"
-							:selection="selected.sourcetext"
 							thing_name="sourcetext"
-							@select="selectItem('sourcetext', $event)"
+							@select="selectItem('sourcetext_id', $event)"
 						></thing-selector>
 
 						<thing-selector v-if="recipes != null"
 							:thing_list="recipes"
-							:selection="selected.recipe"
 							thing_name="recipe"
-							@select="selectItem('recipe', $event)"
+							@select="selectItem('recipe_id', $event)"
 						></thing-selector>
 
        			    	</v-col>
@@ -63,14 +61,18 @@ export default {
       recipes: null,
 
       selected: {
-      	sourcetext: 0,
-      	recipe: 0
+      	sourcetext_id: null,
+      	recipe_id: null
       }
     }
   },
   mounted: function() {
+  	setTimeout(function(){ 
 	this.getAndAssign("/sourcetext", "sourcetexts")
 	this.getAndAssign("/recipe", "recipes")
+
+  }.bind(this), 2000);
+
   },
   methods: {
   	  getAndAssign(url, thekey) {
