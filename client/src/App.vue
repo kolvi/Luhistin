@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-	  <v-app-bar app>
+	  <v-app-bar flat app>
 	      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 	      <v-toolbar-title>Luhistin</v-toolbar-title>
 	  </v-app-bar>
@@ -14,14 +14,29 @@
 			    <v-tab>View old processings</v-tab>
 	 	        <v-tab-item>
        			    <v-row no-gutters>
-       			    	<v-col cols="3">Thing selectors
+       			    	<v-col cols="3">
+
+						<thing-selector v-if="sourcetexts != null"
+							:thing_list="sourcetexts"
+							:selection="selected.sourcetext"
+							thing_name="sourcetext"
+							@select="selectSourcetext"
+						></thing-selector>
+
+						<thing-selector v-if="recipes != null"
+							:thing_list="recipes"
+							:selection="selected.recipe"
+							thing_name="recipe"
+						></thing-selector>
+
        			    	</v-col>
-       			    	<v-col cols="4">Here you edit thing
-       			    		{{sourcetexts}}
+       			    	<v-col cols="4">
+						  <v-card-title>List of steps</v-card-title>
+						  <v-card-subtitle>Click step to edit it</v-card-subtitle>
+						  TODO: STEPS EDITOR 
        			    	</v-col>
 				      <v-col cols="5" class="pa-8">
-				      	Here be the result
-				      	{{recipes}}
+						  TODO: RESULT DISPLAYER
 				      </v-col>
 
        			    </v-row>
@@ -44,7 +59,12 @@ export default {
   data () {
     return {
       sourcetexts: null,
-      recipes: null
+      recipes: null,
+
+      selected: {
+      	sourcetext: 0,
+      	recipe: 0
+      }
     }
   },
   mounted: function() {
@@ -63,7 +83,9 @@ export default {
 	  },
 	  getRecipes() {
   		this.getAndAssign("/recipe", "recipes")
-	  }
+	  },
+	  selectSourcetext(ind) { this.selected.sourcetext = ind; },
+	  selectRecipe(ind) { this.selected.recipe = ind; },
   },
 }
 </script>
