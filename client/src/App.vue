@@ -17,9 +17,11 @@
        			    	<v-col cols="3">Thing selectors
        			    	</v-col>
        			    	<v-col cols="4">Here you edit thing
+       			    		{{sourcetexts}}
        			    	</v-col>
 				      <v-col cols="5" class="pa-8">
 				      	Here be the result
+				      	{{recipes}}
 				      </v-col>
 
        			    </v-row>
@@ -36,12 +38,33 @@
 </template>
 
 <script>
+var axios = require('axios')
+
 export default {
   data () {
     return {
-      msg: 'I am the app!'
+      sourcetexts: null,
+      recipes: null
     }
-  }
+  },
+  mounted: function() {
+  	this.getSourcetexts()
+  	this.getRecipes()
+  },
+  methods: {
+  	  getAndAssign(url, thekey) {
+	  	axios.get(url).then(function(resp) { 
+	  		this[thekey] = resp.data;
+	  	}.bind(this))
+  	  },
+	  getSourcetexts() {
+  		this.getAndAssign("/sourcetext", "sourcetexts")
+
+	  },
+	  getRecipes() {
+  		this.getAndAssign("/recipe", "recipes")
+	  }
+  },
 }
 </script>
 
