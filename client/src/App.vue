@@ -20,13 +20,14 @@
 							:thing_list="sourcetexts"
 							:selection="selected.sourcetext"
 							thing_name="sourcetext"
-							@select="selectSourcetext"
+							@select="selectItem('sourcetext', $event)"
 						></thing-selector>
 
 						<thing-selector v-if="recipes != null"
 							:thing_list="recipes"
 							:selection="selected.recipe"
 							thing_name="recipe"
+							@select="selectItem('recipe', $event)"
 						></thing-selector>
 
        			    	</v-col>
@@ -68,8 +69,8 @@ export default {
     }
   },
   mounted: function() {
-  	this.getSourcetexts()
-  	this.getRecipes()
+	this.getAndAssign("/sourcetext", "sourcetexts")
+	this.getAndAssign("/recipe", "recipes")
   },
   methods: {
   	  getAndAssign(url, thekey) {
@@ -77,15 +78,9 @@ export default {
 	  		this[thekey] = resp.data;
 	  	}.bind(this))
   	  },
-	  getSourcetexts() {
-  		this.getAndAssign("/sourcetext", "sourcetexts")
-
+	  selectItem(itemtype, ind) {
+	  	this.selected[itemtype] = ind;
 	  },
-	  getRecipes() {
-  		this.getAndAssign("/recipe", "recipes")
-	  },
-	  selectSourcetext(ind) { this.selected.sourcetext = ind; },
-	  selectRecipe(ind) { this.selected.recipe = ind; },
   },
 }
 </script>
