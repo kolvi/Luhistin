@@ -4,24 +4,15 @@
       class="mx-auto ma-8"
       max-width="90%">
       <v-card-title>Selected {{thing_name}}</v-card-title>
-<!--
-      <v-card-subtitle>Click {{thing_name}} to select it</v-card-subtitle>
--->
       <v-card-text>
           <v-expansion-panels v-model="panel_status" v-if="thing_list != null">
           <v-expansion-panel>
             <v-expansion-panel-header>
               {{selected_thing_name}}
-<!--
-              {{thing_list[selected_in_list].name}}
--->
             </v-expansion-panel-header>
             <v-expansion-panel-content>
             <v-list dense>
-<!--
-              <v-subheader>thing_list</v-subheader>
-            -->
-              <v-list-item-group v-model="selected_in_list" color="primary">
+              <v-list-item-group v-model="locally_selected" color="primary">
 
                 <v-list-item
                 v-for="(thing, t_ind) in thing_list"
@@ -65,67 +56,70 @@
 // import _ from 'lodash'
 //
 
+const _ = require('lodash')
+
 module.exports = {
-  props: ['thing_list', 'selection', 'thing_name'],
+  props: ['thing_list', 'currently_selected_id', 'thing_name'],
   data: function(){
     return {
       panel_status: undefined,
       dialog_status: false,
-      selected_in_list: undefined,
-//      id: null
+      locally_selected: undefined,
     }
   },
   created() {
+    this.update_selection();
+
     //this.update_selection();
-    this.initial_selection();
+    //this.initial_selection();
   },
   methods: {
     create_thing() {
       this.$emit("add");
     },
     rename_thing() {
-      this.$emit("rename", this.selected_in_list);
+      this.$emit("rename", this.locally_selected);
     },
     delete_thing(item) {
-      this.$emit("delete", this.selected_in_list);
+      this.$emit("delete", this.locally_selected);
     },
     select_thing(item) {
-      console.log("Selecting thing " + item);
       this.panel_status = undefined;
       this.$emit("select", item);
     },
     update_selection() {
-      if (this.selected_in_list !== this.selection)
-        this.selected_in_list = this.selection;
-    },
-    initial_selection() {
-      // TODO: Let pick initial selection
-      if (this.thing_list.length > 0) {
-        this.selected_in_list = 0;
-        this.$emit("select", this.thing_list[0].id)
+      if (this.items_and_selection_exist) {
+        const match = _.findIndex(this.thing_list, (thing) => (thing.id  == this.currently_selected_id) );
+
+        if (match != -1)
+          this.locally_selected = match
       }
-    }
+    },
   },
   computed: {
     selected_thing(){
-      if (this.thing_list !== undefined && this.selected_in_list !== undefined)
-        return this.thing_list[this.selected_in_list];
+      if (this.thing_list != null && this.locally_selected !== undefined)
+        return this.thing_list[this.locally_selected];
       else return undefined;
     },
     selected_thing_name(){
-      return (this.selected_thing ? this.selected_thing.name : "");
+      return (this.selected_thing ? this.selected_thing.name : "")
+    },
+    items_and_selection_exist(){
+      return (this.currently_selected_id && (this.thing_list.length > 0))
     }
+
   },
   watch: {
-/*    selection(value) {
-      console.log("sel = " + this.selection);
+    currently_selected_id(newVal, oldVal) {
       this.update_selection();
-    },*/
-    selected_in_list(value) {
-      console.log("sil = " + this.selected_in_list);
+    },
+    locally_selected(newVal, oldVal) {
+      // This stops the menu clearing itself if the current selection is selected again 
+      if (newVal == undefined) this.locally_selected = oldVal   
     },
     thing_list: function(newVal, oldVal){
-      console.log("thing list updated")
+      this.update_selection();
     }
   },
   

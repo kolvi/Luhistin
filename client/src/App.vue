@@ -19,12 +19,14 @@
 						<thing-selector v-if="sourcetexts != null"
 							:thing_list="sourcetexts"
 							thing_name="sourcetext"
+							:currently_selected_id="selected.sourcetext_id"
 							@select="selectItem('sourcetext_id', $event)"
 						></thing-selector>
 
 						<thing-selector v-if="recipes != null"
 							:thing_list="recipes"
 							thing_name="recipe"
+							:currently_selected_id="selected.recipe_id"
 							@select="selectItem('recipe_id', $event)"
 						></thing-selector>
 
@@ -67,19 +69,40 @@ export default {
     }
   },
   mounted: function() {
-  	setTimeout(function(){ 
-	this.getAndAssign("/sourcetext", "sourcetexts")
-	this.getAndAssign("/recipe", "recipes")
+//  	setTimeout(function(){ 
+	this.getItems("sourcetext", { initial_selection: "force" } )
+	this.getItems("recipe", { initial_selection: "force" } )
 
-  }.bind(this), 2000);
+	//this.getAndAssign("/sourcetext", "sourcetexts", { initial_selection: "sourcetext "} )
+//	this.getAndAssign("/recipe", "recipes")
+
+//  }.bind(this), 2000);
 
   },
   methods: {
-  	  getAndAssign(url, thekey) {
+  	  getItems(itemtype, params) {
+  	  	params = params || {}
+  	  	const url = `/${itemtype}`
+  	  	const keyname = `${itemtype}s`  // todo: possibly set in params
+  	  	const idname = `${itemtype}_id`  // todo: possibly set in params
+
 	  	axios.get(url).then(function(resp) { 
-	  		this[thekey] = resp.data;
+	  		this[keyname] = resp.data
+	  		if (this[keyname].length > 0) {
+	  			const insel = params.initial_selection
+
+	  			if (insel == "force" || (this.selected[idname] == null && insel == "if_null") ) {
+	  				this.selected[idname] = this[keyname][0].id
+	  			}
+	  		}
 	  	}.bind(this))
   	  },
+  	  getAndAssign(url, thekey, params) {
+	  	axios.get(url).then(function(resp) { 
+	  		this[thekey] = resp.data
+	  	}.bind(this))
+  	  },
+
 	  selectItem(itemtype, ind) {
 	  	this.selected[itemtype] = ind;
 	  },
