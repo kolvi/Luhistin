@@ -22,6 +22,7 @@
 							:currently_selected_id="selected.sourcetext_id"
 							@select="selectItem('sourcetext_id', $event)"
 							@add="addItem('sourcetext')"
+							@delete="deleteItem('sourcetext', $event)"
 						></thing-selector>
 
 						<thing-selector v-if="recipes != null"
@@ -76,9 +77,6 @@ export default {
 	this.getItems("sourcetext", { initial_selection: "force" } )
 	this.getItems("recipe", { initial_selection: "force" } )
 
-	//this.getAndAssign("/sourcetext", "sourcetexts", { initial_selection: "sourcetext "} )
-//	this.getAndAssign("/recipe", "recipes")
-
 //  }.bind(this), 2000);
 
   },
@@ -97,18 +95,15 @@ export default {
   	    	return { distortions: [] }
   	  },
   	  getItems(itemtype, params) {
-  	  	params = params || {}
-  	  	const url = `/${itemtype}`
-  	  	const keyname = `${itemtype}s`  // todo: possibly set in params
-  	  	const idname = `${itemtype}_id`  // todo: possibly set in params
+	  	const pars = R.merge(this.itemNameParams(itemtype), (params || {}))
 
-	  	axios.get(url).then(function(resp) { 
-	  		this[keyname] = resp.data
-	  		if (this[keyname].length > 0) {
-	  			const insel = params.initial_selection
+	  	axios.get(pars.url).then(function(resp) { 
+	  		this[pars.keyname] = resp.data
+	  		if (this[pars.keyname].length > 0) {
+	  			const insel = pars.initial_selection
 
-	  			if (insel == "force" || (this.selected[idname] == null && insel == "if_null") ) {
-	  				this.selected[idname] = this[keyname][0].id
+	  			if (insel == "force" || (this.selected[pars.idname] == null && insel == "if_null") ) {
+	  				this.selected[pars.idname] = this[pars.keyname][0].id
 	  			}
 	  		}
 	  	}.bind(this))
@@ -137,6 +132,15 @@ export default {
   			() => (console.log(`Error creating new ${itemtype}`)))
   		}
 	  },
+	  deleteItem(itemtype, id) {
+	  	const pars = this.itemNameParams(itemtype)
+	  	 if (window.confirm(`Really delete this ${itemtype}? with id ${id}?`)) {
+	  	 	   axios.delete(`${pars.url}/${id}`).then(function(response){
+	  	 	   	  this.selectItem(pars.idname, null)
+	  	 	   }.bind(this))
+  		}
+
+	  }
   },
 }
 </script>

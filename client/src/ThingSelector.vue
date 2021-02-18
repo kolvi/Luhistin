@@ -79,10 +79,10 @@ module.exports = {
       this.$emit("add");
     },
     rename_thing() {
-      this.$emit("rename", this.locally_selected);
+      this.$emit("rename", this.selected_thing.id);
     },
     delete_thing(item) {
-      this.$emit("delete", this.locally_selected);
+      this.$emit("delete", this.selected_thing.id);
     },
     select_thing(item) {
       this.panel_status = undefined;
@@ -90,10 +90,13 @@ module.exports = {
     },
     update_selection() {
       if (this.items_and_selection_exist) {
-        const match = _.findIndex(this.thing_list, (thing) => (thing.id  == this.currently_selected_id) );
+        const match = _.findIndex(this.thing_list, (thing) => (thing.id  == this.currently_selected_id) )
 
         if (match != -1)
           this.locally_selected = match
+      }
+      else {
+        this.locally_selected = undefined
       }
     },
   },
