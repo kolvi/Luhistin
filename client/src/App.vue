@@ -81,13 +81,11 @@ export default {
 
   },
   methods: {
-  	  itemNameParams(itemtype) {
-  	  	return {
+  	  itemNameParams: itemtype => ({
   	  		url: `/${itemtype}`,
   	  		keyname: `${itemtype}s`,
   	  		idname:`${itemtype}_id`  // todo: possibly set in params
-  	  	}
-  	  },
+  	  }),
   	  newItemFields(itemtype) {
   	  	if (itemtype == "sourcetext")
   	  		return { content: "" }
