@@ -119,8 +119,8 @@ export default {
 	  	}.bind(this))
   	  },
 
-	  selectItem(itemtype, ind) {
-	  	this.selected[itemtype] = ind;
+	  selectItem(itemtype, id) {
+	  	this.selected[itemtype] = id;
 	  },
 
 	  addItem(itemtype) {
@@ -128,8 +128,11 @@ export default {
   		const name = window.prompt(`Please enter name for new ${itemtype}`)
   		if (name) {
   			const itempars = R.merge({ name: name }, this.newItemFields(itemtype))
-  			axios.post(pars.url, itempars).then(function(response){	
-  				this[pars.keyname].push(response.data);
+  			axios.post(pars.url, itempars).then(function(response){
+  				const new_item = response.data
+
+  				this[pars.keyname].push(new_item)
+  				this.selectItem(pars.idname, new_item.id)
   			}.bind(this),
   			() => (console.log(`Error creating new ${itemtype}`)))
   		}
