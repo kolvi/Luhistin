@@ -86,12 +86,10 @@ export default {
   	  		keyname: `${itemtype}s`,
   	  		idname:`${itemtype}_id`  // todo: possibly set in params
   	  }),
-  	  newItemFields(itemtype) {
-  	  	if (itemtype == "sourcetext")
-  	  		return { content: "" }
-  	    if (itemtype == "recipe")
-  	    	return { distortions: [] }
-  	  },
+  	  newItemFields: itemtype => ({
+  	  	 	sourcetext: { content: "" },
+  	  	 	recipe: { distortions: [] }
+  	  }[itemtype]),
   	  getItems(itemtype, params) {
 	  	const pars = R.merge(this.itemNameParams(itemtype), (params || {}))
 
