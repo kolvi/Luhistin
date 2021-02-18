@@ -21,6 +21,7 @@
 							thing_name="sourcetext"
 							:currently_selected_id="selected.sourcetext_id"
 							@select="selectItem('sourcetext_id', $event)"
+							@add="addItem('sourcetext')"
 						></thing-selector>
 
 						<thing-selector v-if="recipes != null"
@@ -28,6 +29,7 @@
 							thing_name="recipe"
 							:currently_selected_id="selected.recipe_id"
 							@select="selectItem('recipe_id', $event)"
+							@add="addItem('recipe')"
 						></thing-selector>
 
        			    	</v-col>
@@ -55,6 +57,7 @@
 
 <script>
 var axios = require('axios')
+var R = require('ramda')
 
 export default {
   data () {
@@ -80,6 +83,19 @@ export default {
 
   },
   methods: {
+  	  itemNameParams(itemtype) {
+  	  	return {
+  	  		url: `/${itemtype}`,
+  	  		keyname: `${itemtype}s`,
+  	  		idname:`${itemtype}_id`  // todo: possibly set in params
+  	  	}
+  	  },
+  	  newItemFields(itemtype) {
+  	  	if (itemtype == "sourcetext")
+  	  		return { content: "" }
+  	    if (itemtype == "recipe")
+  	    	return { distortions: [] }
+  	  },
   	  getItems(itemtype, params) {
   	  	params = params || {}
   	  	const url = `/${itemtype}`
@@ -105,6 +121,18 @@ export default {
 
 	  selectItem(itemtype, ind) {
 	  	this.selected[itemtype] = ind;
+	  },
+
+	  addItem(itemtype) {
+	  	const pars = this.itemNameParams(itemtype)
+  		const name = window.prompt(`Please enter name for new ${itemtype}`)
+  		if (name) {
+  			const itempars = R.merge({ name: name }, this.newItemFields(itemtype))
+  			axios.post(pars.url, itempars).then(function(response){	
+  				this[pars.keyname].push(response.data);
+  			}.bind(this),
+  			() => (console.log(`Error creating new ${itemtype}`)))
+  		}
 	  },
   },
 }

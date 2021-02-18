@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "lodash": "^4.17.20",
+    "ramda": "^0.27.1",
     "vue": "^2.6.12",
     "vuetify": "^2.4.4",
     "webpack": "^5.21.2",

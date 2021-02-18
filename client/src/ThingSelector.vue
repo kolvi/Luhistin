@@ -75,6 +75,7 @@ module.exports = {
   },
   methods: {
     create_thing() {
+      console.log("dsadsa")
       this.$emit("add");
     },
     rename_thing() {
