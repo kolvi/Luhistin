@@ -90,6 +90,9 @@ export default {
   	  	 	sourcetext: { content: "" },
   	  	 	recipe: { distortions: [] }
   	  }[itemtype]),
+  	  newItemWithName(itemtype, name) {
+  	  	return R.merge({ name: name }, this.newItemFields(itemtype))
+  	  },
   	  getItems(itemtype, params) {
 	  	const pars = R.merge(this.itemNameParams(itemtype), (params || {}))
 
@@ -118,7 +121,7 @@ export default {
 	  	const pars = this.itemNameParams(itemtype)
   		const name = window.prompt(`Please enter name for new ${itemtype}`)
   		if (name) {
-  			const itempars = R.merge({ name: name }, this.newItemFields(itemtype))
+  			const itempars = this.newItemWithName(itemtype, name)
   			axios.post(pars.url, itempars).then(function(response){
   				const new_item = response.data
 
