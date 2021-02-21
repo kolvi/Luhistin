@@ -135,10 +135,19 @@ export default {
 	  	const pars = this.itemNameParams(itemtype)
 	  	 if (window.confirm(`Really delete this ${itemtype}? with id ${id}?`)) {
 	  	 	   axios.delete(`${pars.url}/${id}`).then(function(response){
-	  	 	   	  this.selectItem(pars.idname, null)
-	  	 	   }.bind(this))
-  		}
+	  	 	   	  const items = this[pars.keyname]
+	  	 	   	  id
+	  	 	   	  debugger
+	  	 	   	  const item_id = R.findIndex(items, R.propEq('id', id))
 
+	  	 	   	  if (items.length > 0)
+	  	 	   	    this.selectItem(pars.idname, items[0].id)
+	  	 	   	  else
+	  	 	   	    this.selectItem(pars.idname, null)
+
+	  	 	   }.bind(this),
+	  	 	   () => (console.log(`Error creating new ${itemtype}`)))
+  		}
 	  }
   },
 }
